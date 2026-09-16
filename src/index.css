@@ -1,0 +1,43 @@
+/* ============================================================
+   CampusVoice — Signature Vibrant Glassmorphism Reset
+   ============================================================ */
+
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html, body {
+  width: 100%;
+  min-height: 100vh;
+  margin: 0;
+  padding: 0;
+  font-family: 'Plus Jakarta Sans', 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  color: #0f172a;
+  
+  /* CampusVoice Signature Multi-Radial Pastel Mesh Gradient */
+  background-color: #C7D2FE !important;
+  background-image: 
+      radial-gradient(at 0% 0%, rgba(14, 165, 233, 0.45) 0px, transparent 50%),
+      radial-gradient(at 100% 0%, rgba(168, 85, 247, 0.40) 0px, transparent 50%),
+      radial-gradient(at 100% 100%, rgba(16, 185, 129, 0.40) 0px, transparent 50%),
+      radial-gradient(at 0% 100%, rgba(59, 130, 246, 0.40) 0px, transparent 50%),
+      linear-gradient(135deg, #BAE6FD 0%, #E0E7FF 40%, #F3E8FF 70%, #D1FAE5 100%) !important;
+  background-attachment: fixed !important;
+  background-size: cover !important;
+  
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+#root {
+  width: 100%;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+button, input, select, textarea {
+  font-family: inherit;
+}
