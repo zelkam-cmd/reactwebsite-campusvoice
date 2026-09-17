@@ -114,16 +114,16 @@ export default function Sidebar({ onNavigateStudents }) {
           </div>
         </div>
 
-        {/* System Health Widget */}
-        <div className="system-health-widget">
-          <div className="system-health-header">
-            <span className="system-health-label">System Status</span>
-            <span className="status-online-badge">
-              <span className="online-dot"></span> Online
+        {/* System Health Widget (Fills Empty Sidebar Gap) */}
+        <div style={{ margin: '24px 12px 12px', padding: '14px', background: 'rgba(255, 255, 255, 0.05)', border: '1px solid rgba(255, 255, 255, 0.1)', borderRadius: '14px' }}>
+          <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '8px' }}>
+            <span style={{ fontSize: '10px', fontWeight: 700, color: '#94A3B8', textTransform: 'uppercase', letterSpacing: '0.05em' }}>System Status</span>
+            <span style={{ display: 'inline-flex', alignItems: 'center', gap: '4px', fontSize: '10px', fontWeight: 700, color: '#34D399', background: 'rgba(52, 211, 153, 0.15)', padding: '2px 8px', borderRadius: '99px' }}>
+              <span style={{ width: '6px', height: '6px', borderRadius: '50%', background: '#34D399', display: 'inline-block' }}></span> Online
             </span>
           </div>
-          <div className="system-health-title">CampusVoice SaaS v2.4</div>
-          <div className="system-health-sub">Active Database • SSL Secure</div>
+          <div style={{ fontSize: '12px', fontWeight: 700, color: '#F8FAFC', marginBottom: '2px' }}>CampusVoice SaaS v2.4</div>
+          <div style={{ fontSize: '10px', color: '#94A3B8' }}>Active Database • SSL Secure</div>
         </div>
       </nav>
 
