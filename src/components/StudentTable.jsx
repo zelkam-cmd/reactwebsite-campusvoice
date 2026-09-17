@@ -89,10 +89,10 @@ export default function StudentTable({
       </div>
 
       {/* Content Header with Add New Student button */}
-      <div className="content-header">
+      <div className="content-header" style={{ marginBottom: '20px' }}>
         <div>
-          <h2 className="content-title">Student Information & Registry</h2>
-          <p className="content-subtitle">Manage member profiles, view updated records, print demographic sheets, and maintain accounts</p>
+          <h2 className="content-title" style={{ fontSize: '28px', fontWeight: 800, color: '#0F172A', letterSpacing: '-0.02em', margin: 0 }}>Student Information & Registry</h2>
+          <p className="content-subtitle" style={{ fontSize: '14px', color: '#475569', marginTop: '4px', marginBottom: 0 }}>Manage member profiles, view updated records, print demographic sheets, and maintain accounts</p>
         </div>
         <div className="content-actions">
           <button className="btn btn-primary" onClick={onAdd} style={{ borderRadius: '9999px', padding: '10px 22px' }}>
@@ -288,13 +288,13 @@ export default function StudentTable({
                   return (
                     <tr key={studentId} style={{ borderBottom: '1px solid rgba(226, 232, 240, 0.7)' }} className="student-table-row">
                       {/* Photo */}
-                      <td style={{ padding: '14px 20px' }}>
+                      <td style={{ padding: '16px 20px', verticalAlign: 'middle' }}>
                         <div
                           style={{
                             width: '38px',
                             height: '38px',
                             borderRadius: '8px',
-                            background: '#e0f2fe',
+                            background: '#e2e8f0',
                             color: '#0284c7',
                             display: 'flex',
                             alignItems: 'center',
@@ -308,9 +308,17 @@ export default function StudentTable({
                       </td>
 
                       {/* Student ID */}
-                      <td style={{ padding: '14px 20px' }}>
+                      <td style={{ padding: '16px 20px', width: '110px', verticalAlign: 'middle' }}>
                         <span
-                          style={{ fontWeight: 700, color: '#0284c7', cursor: 'pointer', fontSize: '13px' }}
+                          style={{
+                            fontWeight: 600,
+                            color: '#0284c7',
+                            cursor: 'pointer',
+                            fontSize: '14px',
+                            lineHeight: 1.3,
+                            display: 'inline-block',
+                            wordBreak: 'break-word'
+                          }}
                           onClick={() => onView(stu)}
                         >
                           {studentId}
@@ -318,29 +326,28 @@ export default function StudentTable({
                       </td>
 
                       {/* Full Name & Contact */}
-                      <td style={{ padding: '14px 20px' }}>
-                        <div style={{ fontWeight: 700, color: '#0f172a', fontSize: '14px' }}>{stu.name}</div>
-                        <div style={{ fontSize: '11px', color: '#64748b', marginTop: '2px' }}>
+                      <td style={{ padding: '16px 20px', width: '220px', verticalAlign: 'middle' }}>
+                        <div style={{ fontWeight: 600, color: '#0f172a', fontSize: '14px', lineHeight: 1.3 }}>{stu.name}</div>
+                        <div style={{ fontSize: '11px', color: '#64748b', marginTop: '2px', lineHeight: 1.35, wordBreak: 'break-word' }}>
                           {stu.email || 'No email'} • {stu.contact || 'No mobile'}
                         </div>
                       </td>
 
                       {/* Actions (View, Edit, Print, Reset matching Image 2) */}
-                      <td style={{ padding: '14px 20px', whiteSpace: 'nowrap' }}>
-                        <div style={{ display: 'inline-flex', gap: '8px', alignItems: 'center' }}>
+                      <td style={{ padding: '16px 20px', whiteSpace: 'nowrap', verticalAlign: 'middle' }}>
+                        <div style={{ display: 'inline-flex', gap: '6px', alignItems: 'center' }}>
                           <button
                             type="button"
                             className="btn btn-secondary btn-sm"
                             onClick={() => onView(stu)}
                             style={{
-                              padding: '5px 14px',
+                              padding: '4px 10px',
                               fontSize: '12px',
                               fontWeight: 600,
                               borderRadius: '9999px',
                               background: '#ffffff',
                               border: '1px solid #e2e8f0',
-                              color: '#0f172a',
-                              boxShadow: '0 1px 2px rgba(0,0,0,0.03)'
+                              color: '#0f172a'
                             }}
                             title="View Full Dossier"
                           >
@@ -351,14 +358,13 @@ export default function StudentTable({
                             className="btn btn-secondary btn-sm"
                             onClick={() => onEdit(stu)}
                             style={{
-                              padding: '5px 14px',
+                              padding: '4px 10px',
                               fontSize: '12px',
                               fontWeight: 600,
                               borderRadius: '9999px',
                               background: '#ffffff',
                               border: '1px solid #e2e8f0',
-                              color: '#0f172a',
-                              boxShadow: '0 1px 2px rgba(0,0,0,0.03)'
+                              color: '#0f172a'
                             }}
                             title="Edit Student Profile"
                           >
@@ -369,7 +375,7 @@ export default function StudentTable({
                             className="btn btn-ghost btn-sm text-primary"
                             onClick={() => onPrint ? onPrint(stu) : window.print()}
                             style={{
-                              padding: '4px 6px',
+                              padding: '4px 8px',
                               fontSize: '12px',
                               fontWeight: 600,
                               color: '#0284c7',
@@ -391,7 +397,7 @@ export default function StudentTable({
                               }
                             }}
                             style={{
-                              padding: '4px 6px',
+                              padding: '4px 8px',
                               fontSize: '12px',
                               fontWeight: 600,
                               color: '#ea580c',
@@ -407,29 +413,30 @@ export default function StudentTable({
                       </td>
 
                       {/* Department / College */}
-                      <td style={{ padding: '14px 20px' }}>
-                        <div style={{ fontSize: '13px', fontWeight: 600, color: '#0f172a' }}>{stu.department || '—'}</div>
+                      <td style={{ padding: '16px 20px', verticalAlign: 'middle' }}>
+                        <div style={{ fontSize: '13px', fontWeight: 500, color: '#0f172a' }}>{stu.department || '—'}</div>
                         <div style={{ fontSize: '11px', color: '#64748b', marginTop: '2px' }}>{stu.yearLevel || 'Student'}</div>
                       </td>
 
                       {/* Civil Status & Age */}
-                      <td style={{ padding: '14px 20px' }}>
-                        <div style={{ fontSize: '13px', color: '#0f172a', fontWeight: 500 }}>{isSingle}</div>
+                      <td style={{ padding: '16px 20px', verticalAlign: 'middle' }}>
+                        <div style={{ fontSize: '13px', color: '#0f172a', fontWeight: 400 }}>{isSingle}</div>
                         <div style={{ fontSize: '11px', color: '#64748b', marginTop: '2px' }}>{ageDisplay}</div>
                       </td>
 
                       {/* Status */}
-                      <td style={{ padding: '14px 20px' }}>
+                      <td style={{ padding: '16px 20px', verticalAlign: 'middle' }}>
                         <span
                           className="badge"
                           style={{
                             display: 'inline-block',
-                            padding: '4px 12px',
+                            padding: '4px 10px',
                             borderRadius: '9999px',
                             fontSize: '11px',
                             fontWeight: 700,
-                            background: isActive ? '#dcfce7' : '#fee2e2',
-                            color: isActive ? '#15803d' : '#b91c1c'
+                            background: isActive ? 'rgba(16, 185, 129, 0.12)' : 'rgba(239, 68, 68, 0.12)',
+                            color: isActive ? '#059669' : '#dc2626',
+                            border: isActive ? '1px solid rgba(16, 185, 129, 0.25)' : '1px solid rgba(239, 68, 68, 0.25)'
                           }}
                         >
                           {isActive ? 'Active' : 'Inactive'}
@@ -437,8 +444,8 @@ export default function StudentTable({
                       </td>
 
                       {/* Last Updated */}
-                      <td style={{ padding: '14px 20px' }}>
-                        <div style={{ fontSize: '12px', color: '#64748b' }}>
+                      <td style={{ padding: '16px 20px', verticalAlign: 'middle' }}>
+                        <div style={{ fontSize: '12px', color: '#475569' }}>
                           {stu.lastUpdated || 'Original record'}
                         </div>
                       </td>

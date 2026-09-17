@@ -25,7 +25,7 @@ export default function Sidebar({ currentView, onNavigateDashboard, onNavigateSt
 
           <button
             type="button"
-            className={`sidebar-link ${currentView === 'dashboard' ? 'active' : ''}`}
+            className="sidebar-link"
             onClick={onNavigateDashboard}
             title="Admin Command Center"
           >
@@ -77,7 +77,7 @@ export default function Sidebar({ currentView, onNavigateDashboard, onNavigateSt
 
           <button
             type="button"
-            className={`sidebar-link ${['list', 'add', 'edit', 'detail', 'print'].includes(currentView) ? 'active' : ''}`}
+            className="sidebar-link"
             onClick={onNavigateStudents}
             title="Student Registry & Profiling"
           >

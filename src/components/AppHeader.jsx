@@ -9,10 +9,10 @@ export default function AppHeader({ title = 'Student Information & Registry' }) 
         top: '16px',
         zIndex: 100,
         height: '70px',
-        background: 'rgba(255, 255, 255, 0.75)',
+        background: 'rgba(255, 255, 255, 0.88)',
         backdropFilter: 'blur(24px) saturate(180%)',
         WebkitBackdropFilter: 'blur(24px) saturate(180%)',
-        border: '1px solid rgba(255, 255, 255, 0.6)',
+        border: '1px solid rgba(255, 255, 255, 0.8)',
         borderRadius: '20px',
         display: 'flex',
         alignItems: 'center',
@@ -26,8 +26,8 @@ export default function AppHeader({ title = 'Student Information & Registry' }) 
         <h1
           className="header-title"
           style={{
-            fontSize: '20px',
-            fontWeight: 800,
+            fontSize: '16px',
+            fontWeight: 700,
             color: '#0f172a',
             letterSpacing: '-0.02em',
             margin: 0
@@ -53,7 +53,7 @@ export default function AppHeader({ title = 'Student Information & Registry' }) 
             borderRadius: '50%',
             color: '#64748b',
             position: 'relative',
-            background: 'rgba(255, 255, 255, 0.7)',
+            background: 'rgba(255, 255, 255, 0.85)',
             border: '1px solid rgba(0, 0, 0, 0.06)',
             cursor: 'pointer'
           }}
@@ -85,7 +85,7 @@ export default function AppHeader({ title = 'Student Information & Registry' }) 
             gap: '10px',
             padding: '4px 6px 4px 16px',
             borderRadius: '9999px',
-            background: 'rgba(255, 255, 255, 0.6)',
+            background: 'rgba(255, 255, 255, 0.85)',
             border: '1px solid rgba(0, 0, 0, 0.05)',
             cursor: 'pointer'
           }}
