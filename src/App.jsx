@@ -158,84 +158,78 @@ export default function App() {
   };
 
   return (
-    <div className="admin-console-layout app-layout">
-      {/* Toast Notification */}
-      {toastMessage && (
-        <div className="toast-notification">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#22c55e" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-            <polyline points="20 6 9 17 4 12" />
-          </svg>
-          <span>{toastMessage}</span>
-        </div>
-      )}
+    <>
+      <div className="ambient-blob-center"></div>
+      <div className="app-layout admin-console-layout">
+        {/* Toast Notification */}
+        {toastMessage && (
+          <div className="toast-notification">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#22c55e" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+              <polyline points="20 6 9 17 4 12" />
+            </svg>
+            <span>{toastMessage}</span>
+          </div>
+        )}
 
-      {/* Left Sidebar (Only Students tab active/clickable, Administrators removed) */}
-      <Sidebar onNavigateStudents={() => { setViewMode('list'); setSelectedStudent(null); }} />
+        {/* Left Sidebar (Only Students tab active/clickable, Administrators removed) */}
+        <Sidebar onNavigateStudents={() => { setViewMode('list'); setSelectedStudent(null); }} />
 
-      {/* Main Content Area */}
-      <main className="main-content app-main">
-        {/* Floating Glass Top Navbar Header from CampusVoice */}
-        <AppHeader title={getNavTitle()} />
+        {/* Main Content Area */}
+        <main className="app-main main-content">
+          {/* Floating Glass Top Navbar Header from CampusVoice */}
+          <AppHeader title={getNavTitle()} />
 
-        {/* Dynamic Full-Page Views matching original CampusVoice */}
-        <div className="content-container">
-          {viewMode === 'list' && (
-            <StudentTable
-              students={students}
-              onView={handleOpenView}
-              onEdit={handleOpenEdit}
-              onDelete={handleOpenDelete}
-              onAdd={handleOpenAdd}
-              onPrint={handleOpenPrint}
-            />
-          )}
+          {/* Dynamic Full-Page Views matching original CampusVoice */}
+          <div className="app-content content-container">
+            {viewMode === 'list' && (
+              <StudentTable
+                students={students}
+                onView={handleOpenView}
+                onEdit={handleOpenEdit}
+                onDelete={handleOpenDelete}
+                onAdd={handleOpenAdd}
+                onPrint={handleOpenPrint}
+              />
+            )}
 
-          {viewMode === 'edit' && (
-            <StudentEdit
-              student={selectedStudent}
-              onSave={handleSaveStudent}
-              onCancel={() => { setViewMode('list'); setSelectedStudent(null); }}
-            />
-          )}
+            {viewMode === 'edit' && (
+              <StudentEdit
+                student={selectedStudent}
+                onSave={handleSaveStudent}
+                onCancel={() => { setViewMode('list'); setSelectedStudent(null); }}
+              />
+            )}
 
-          {viewMode === 'add' && (
-            <StudentAdd
-              onSave={handleSaveStudent}
-              onCancel={() => { setViewMode('list'); setSelectedStudent(null); }}
-              existingStudents={students}
-            />
-          )}
+            {viewMode === 'add' && (
+              <StudentAdd
+                onSave={handleSaveStudent}
+                onCancel={() => { setViewMode('list'); setSelectedStudent(null); }}
+                existingStudents={students}
+              />
+            )}
 
-          {viewMode === 'detail' && (
-            <StudentDetail
-              student={selectedStudent}
-              onEdit={handleOpenEdit}
-              onDelete={handleOpenDelete}
-              onPrint={handleOpenPrint}
-              onBack={() => { setViewMode('list'); setSelectedStudent(null); }}
-            />
-          )}
-        </div>
+            {viewMode === 'detail' && (
+              <StudentDetail
+                student={selectedStudent}
+                onEdit={handleOpenEdit}
+                onDelete={handleOpenDelete}
+                onPrint={handleOpenPrint}
+                onBack={() => { setViewMode('list'); setSelectedStudent(null); }}
+              />
+            )}
+          </div>
 
-        {/* Authentic CampusVoice Footer matching Image 4 */}
-        <footer
-          className="app-footer"
-          style={{
-            marginTop: '36px',
-            padding: '24px 0 16px 0',
-            display: 'flex',
-            justifyContent: 'space-between',
-            alignItems: 'center',
-            fontSize: '12px',
-            color: '#94a3b8'
-          }}
-        >
-          <span>© 2026 CampusVoice — Bulacan State University</span>
-          <span>
-            v1.0.0 | <a href="mailto:support@campusvoice.edu" style={{ color: '#0284c7', textDecoration: 'none', opacity: 0.85 }}>support@campusvoice.edu</a>
-          </span>
-        </footer>
-      </main>
-    </div>
+          {/* Authentic CampusVoice Footer */}
+          <footer className="app-footer">
+            <div className="footer-content" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', width: '100%', padding: '24px 8px 16px 8px' }}>
+              <span>© 2026 CampusVoice — Bulacan State University</span>
+              <span>
+                v1.0.0 | <a href="mailto:support@campusvoice.edu">support@campusvoice.edu</a>
+              </span>
+            </div>
+          </footer>
+        </main>
+      </div>
+    </>
   );
 }

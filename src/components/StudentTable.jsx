@@ -110,16 +110,16 @@ export default function StudentTable({
           style={{
             display: 'flex',
             flexWrap: 'wrap',
-            gap: '24px',
+            gap: '12px',
             alignItems: 'center',
-            justifyContent: 'flex-start',
+            justifyContent: 'space-between',
             padding: '18px 24px',
             background: 'transparent',
-            borderBottom: '1px solid rgba(226, 232, 240, 0.7)'
+            borderBottom: '1px solid rgba(226, 232, 240, 0.8)'
           }}
         >
           {/* Search Box */}
-          <div className="search-bar" style={{ width: '320px', flex: '0 1 320px', minWidth: '220px', position: 'relative' }}>
+          <div className="search-bar" style={{ flex: '1 1 280px', minWidth: '240px', position: 'relative' }}>
             <div style={{ position: 'absolute', left: '14px', top: '50%', transform: 'translateY(-50%)', color: '#94a3b8', display: 'flex', alignItems: 'center' }}>
               <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
                 <circle cx="11" cy="11" r="8" />
@@ -132,16 +132,13 @@ export default function StudentTable({
               style={{
                 width: '100%',
                 paddingLeft: '40px',
-                paddingRight: '14px',
                 borderRadius: '12px',
-                height: '46px',
+                height: '42px',
                 background: '#ffffff',
                 border: '1px solid #e2e8f0',
                 fontSize: '13px',
                 color: '#1e293b',
-                boxShadow: '0 1px 2px rgba(0,0,0,0.02)',
-                outline: 'none',
-                boxSizing: 'border-box'
+                boxShadow: '0 1px 2px rgba(0,0,0,0.02)'
               }}
               placeholder="Search ID, name, email, or mobile..."
               value={search}
@@ -149,32 +146,21 @@ export default function StudentTable({
             />
           </div>
 
-          {/* Filter Dropdowns with spacious vertical padding and lightened carets */}
-          <div style={{ display: 'flex', gap: '10px', flexWrap: 'wrap', alignItems: 'center' }}>
+          {/* Filter Dropdowns */}
+          <div style={{ display: 'flex', gap: '8px', flexWrap: 'wrap', alignItems: 'center' }}>
             {/* Sort Filter */}
             <select
               className="form-select"
               style={{
                 width: 'auto',
                 fontSize: '13px',
-                height: '46px',
-                padding: '12px 38px 12px 14px',
-                lineHeight: '1.4',
+                height: '42px',
                 borderRadius: '12px',
                 background: '#ffffff',
                 border: '1px solid #e2e8f0',
+                padding: '0 14px',
                 color: '#334155',
-                boxShadow: '0 1px 2px rgba(0,0,0,0.02)',
-                cursor: 'pointer',
-                outline: 'none',
-                boxSizing: 'border-box',
-                appearance: 'none',
-                WebkitAppearance: 'none',
-                MozAppearance: 'none',
-                backgroundImage: `url("data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%2212%22%20height%3D%2212%22%20viewBox%3D%220%200%2024%2024%22%20fill%3D%22none%22%20stroke%3D%22%2394a3b8%22%20stroke-width%3D%222.2%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%3Cpolyline%20points%3D%226%209%2012%2015%2018%209%22%3E%3C%2Fpolyline%3E%3C%2Fsvg%3E")`,
-                backgroundRepeat: 'no-repeat',
-                backgroundPosition: 'right 14px center',
-                backgroundSize: '12px 12px'
+                boxShadow: '0 1px 2px rgba(0,0,0,0.02)'
               }}
               value={sortBy}
               onChange={(e) => setSortBy(e.target.value)}
@@ -191,24 +177,13 @@ export default function StudentTable({
               style={{
                 width: 'auto',
                 fontSize: '13px',
-                height: '46px',
-                padding: '12px 38px 12px 14px',
-                lineHeight: '1.4',
+                height: '42px',
                 borderRadius: '12px',
                 background: '#ffffff',
                 border: '1px solid #e2e8f0',
+                padding: '0 14px',
                 color: '#334155',
-                boxShadow: '0 1px 2px rgba(0,0,0,0.02)',
-                cursor: 'pointer',
-                outline: 'none',
-                boxSizing: 'border-box',
-                appearance: 'none',
-                WebkitAppearance: 'none',
-                MozAppearance: 'none',
-                backgroundImage: `url("data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%2212%22%20height%3D%2212%22%20viewBox%3D%220%200%2024%2024%22%20fill%3D%22none%22%20stroke%3D%22%2394a3b8%22%20stroke-width%3D%222.2%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%3Cpolyline%20points%3D%226%209%2012%2015%2018%209%22%3E%3C%2Fpolyline%3E%3C%2Fsvg%3E")`,
-                backgroundRepeat: 'no-repeat',
-                backgroundPosition: 'right 14px center',
-                backgroundSize: '12px 12px'
+                boxShadow: '0 1px 2px rgba(0,0,0,0.02)'
               }}
               value={deptFilter}
               onChange={(e) => setDeptFilter(e.target.value)}
@@ -225,24 +200,13 @@ export default function StudentTable({
               style={{
                 width: 'auto',
                 fontSize: '13px',
-                height: '46px',
-                padding: '12px 38px 12px 14px',
-                lineHeight: '1.4',
+                height: '42px',
                 borderRadius: '12px',
                 background: '#ffffff',
                 border: '1px solid #e2e8f0',
+                padding: '0 14px',
                 color: '#334155',
-                boxShadow: '0 1px 2px rgba(0,0,0,0.02)',
-                cursor: 'pointer',
-                outline: 'none',
-                boxSizing: 'border-box',
-                appearance: 'none',
-                WebkitAppearance: 'none',
-                MozAppearance: 'none',
-                backgroundImage: `url("data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%2212%22%20height%3D%2212%22%20viewBox%3D%220%200%2024%2024%22%20fill%3D%22none%22%20stroke%3D%22%2394a3b8%22%20stroke-width%3D%222.2%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%3Cpolyline%20points%3D%226%209%2012%2015%2018%209%22%3E%3C%2Fpolyline%3E%3C%2Fsvg%3E")`,
-                backgroundRepeat: 'no-repeat',
-                backgroundPosition: 'right 14px center',
-                backgroundSize: '12px 12px'
+                boxShadow: '0 1px 2px rgba(0,0,0,0.02)'
               }}
               value={civilFilter}
               onChange={(e) => setCivilFilter(e.target.value)}
@@ -259,24 +223,13 @@ export default function StudentTable({
               style={{
                 width: 'auto',
                 fontSize: '13px',
-                height: '46px',
-                padding: '12px 38px 12px 14px',
-                lineHeight: '1.4',
+                height: '42px',
                 borderRadius: '12px',
                 background: '#ffffff',
                 border: '1px solid #e2e8f0',
+                padding: '0 14px',
                 color: '#334155',
-                boxShadow: '0 1px 2px rgba(0,0,0,0.02)',
-                cursor: 'pointer',
-                outline: 'none',
-                boxSizing: 'border-box',
-                appearance: 'none',
-                WebkitAppearance: 'none',
-                MozAppearance: 'none',
-                backgroundImage: `url("data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%2212%22%20height%3D%2212%22%20viewBox%3D%220%200%2024%2024%22%20fill%3D%22none%22%20stroke%3D%22%2394a3b8%22%20stroke-width%3D%222.2%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%3Cpolyline%20points%3D%226%209%2012%2015%2018%209%22%3E%3C%2Fpolyline%3E%3C%2Fsvg%3E")`,
-                backgroundRepeat: 'no-repeat',
-                backgroundPosition: 'right 14px center',
-                backgroundSize: '12px 12px'
+                boxShadow: '0 1px 2px rgba(0,0,0,0.02)'
               }}
               value={statusFilter}
               onChange={(e) => setStatusFilter(e.target.value)}
@@ -293,14 +246,14 @@ export default function StudentTable({
           <table className="data-table" style={{ width: '100%', minWidth: '950px', borderCollapse: 'collapse' }}>
             <thead>
               <tr style={{ background: 'rgba(248, 250, 252, 0.5)', borderBottom: '1px solid #e2e8f0' }}>
-                <th style={{ width: '55px', padding: '14px 20px', textAlign: 'left', fontSize: '11px', fontWeight: 500, color: '#64748b', textTransform: 'uppercase', letterSpacing: '0.06em' }}>PHOTO</th>
-                <th style={{ padding: '14px 20px', textAlign: 'left', fontSize: '11px', fontWeight: 500, color: '#64748b', textTransform: 'uppercase', letterSpacing: '0.06em' }}>STUDENT ID</th>
-                <th style={{ padding: '14px 20px', textAlign: 'left', fontSize: '11px', fontWeight: 500, color: '#64748b', textTransform: 'uppercase', letterSpacing: '0.06em' }}>FULL NAME &amp; CONTACT</th>
-                <th style={{ padding: '14px 20px', textAlign: 'left', fontSize: '11px', fontWeight: 500, color: '#64748b', textTransform: 'uppercase', letterSpacing: '0.06em', whiteSpace: 'nowrap' }}>ACTIONS</th>
-                <th style={{ padding: '14px 20px', textAlign: 'left', fontSize: '11px', fontWeight: 500, color: '#64748b', textTransform: 'uppercase', letterSpacing: '0.06em' }}>DEPARTMENT / COLLEGE</th>
-                <th style={{ padding: '14px 20px', textAlign: 'left', fontSize: '11px', fontWeight: 500, color: '#64748b', textTransform: 'uppercase', letterSpacing: '0.06em' }}>CIVIL STATUS &amp; AGE</th>
-                <th style={{ padding: '14px 20px', textAlign: 'left', fontSize: '11px', fontWeight: 500, color: '#64748b', textTransform: 'uppercase', letterSpacing: '0.06em' }}>STATUS</th>
-                <th style={{ padding: '14px 20px', textAlign: 'left', fontSize: '11px', fontWeight: 500, color: '#64748b', textTransform: 'uppercase', letterSpacing: '0.06em' }}>LAST UPDATED</th>
+                <th style={{ width: '55px', padding: '14px 20px', textAlign: 'left', fontSize: '11px', fontWeight: 800, color: '#475569', textTransform: 'uppercase', letterSpacing: '0.05em' }}>PHOTO</th>
+                <th style={{ padding: '14px 20px', textAlign: 'left', fontSize: '11px', fontWeight: 800, color: '#475569', textTransform: 'uppercase', letterSpacing: '0.05em' }}>STUDENT ID</th>
+                <th style={{ padding: '14px 20px', textAlign: 'left', fontSize: '11px', fontWeight: 800, color: '#475569', textTransform: 'uppercase', letterSpacing: '0.05em' }}>FULL NAME & CONTACT</th>
+                <th style={{ padding: '14px 20px', textAlign: 'left', fontSize: '11px', fontWeight: 800, color: '#475569', textTransform: 'uppercase', letterSpacing: '0.05em', whiteSpace: 'nowrap' }}>ACTIONS</th>
+                <th style={{ padding: '14px 20px', textAlign: 'left', fontSize: '11px', fontWeight: 800, color: '#475569', textTransform: 'uppercase', letterSpacing: '0.05em' }}>DEPARTMENT / COLLEGE</th>
+                <th style={{ padding: '14px 20px', textAlign: 'left', fontSize: '11px', fontWeight: 800, color: '#475569', textTransform: 'uppercase', letterSpacing: '0.05em' }}>CIVIL STATUS & AGE</th>
+                <th style={{ padding: '14px 20px', textAlign: 'left', fontSize: '11px', fontWeight: 800, color: '#475569', textTransform: 'uppercase', letterSpacing: '0.05em' }}>STATUS</th>
+                <th style={{ padding: '14px 20px', textAlign: 'left', fontSize: '11px', fontWeight: 800, color: '#475569', textTransform: 'uppercase', letterSpacing: '0.05em' }}>LAST UPDATED</th>
               </tr>
             </thead>
             <tbody>
@@ -322,48 +275,47 @@ export default function StudentTable({
                   const isActive = (stu.status || 'active').toLowerCase() === 'active';
 
                   return (
-                    <tr key={studentId} style={{ borderBottom: '1px solid rgba(226, 232, 240, 0.35)' }} className="student-table-row">
-                      {/* Photo: Circular Avatar with Smaller, Bolder Initials */}
-                      <td style={{ padding: '19px 20px' }}>
+                    <tr key={studentId} style={{ borderBottom: '1px solid rgba(226, 232, 240, 0.7)' }} className="student-table-row">
+                      {/* Photo */}
+                      <td style={{ padding: '14px 20px' }}>
                         <div
                           style={{
                             width: '38px',
                             height: '38px',
-                            borderRadius: '50%',
+                            borderRadius: '8px',
                             background: '#e0f2fe',
                             color: '#0284c7',
                             display: 'flex',
                             alignItems: 'center',
                             justifyContent: 'center',
-                            fontWeight: 800,
-                            fontSize: '11.5px',
-                            letterSpacing: '-0.02em'
+                            fontWeight: 700,
+                            fontSize: '12px'
                           }}
                         >
                           {initials}
                         </div>
                       </td>
 
-                      {/* Student ID: Semibold (font-weight: 600) */}
-                      <td style={{ padding: '19px 20px' }}>
+                      {/* Student ID */}
+                      <td style={{ padding: '14px 20px' }}>
                         <span
-                          style={{ fontWeight: 600, color: '#0284c7', cursor: 'pointer', fontSize: '13.5px' }}
+                          style={{ fontWeight: 700, color: '#0284c7', cursor: 'pointer', fontSize: '13px' }}
                           onClick={() => onView(stu)}
                         >
                           {studentId}
                         </span>
                       </td>
 
-                      {/* Full Name: Semibold (font-weight: 600) & Secondary Contact: Lighter Muted Gray */}
-                      <td style={{ padding: '19px 20px' }}>
-                        <div style={{ fontWeight: 600, color: '#0f172a', fontSize: '14px' }}>{stu.name}</div>
-                        <div style={{ fontSize: '12px', color: '#94a3b8', marginTop: '3px', fontWeight: 400 }}>
+                      {/* Full Name & Contact */}
+                      <td style={{ padding: '14px 20px' }}>
+                        <div style={{ fontWeight: 700, color: '#0f172a', fontSize: '14px' }}>{stu.name}</div>
+                        <div style={{ fontSize: '11px', color: '#64748b', marginTop: '2px' }}>
                           {stu.email || 'No email'} • {stu.contact || 'No mobile'}
                         </div>
                       </td>
 
-                      {/* Actions (View, Edit, Print, Reset) */}
-                      <td style={{ padding: '19px 20px', whiteSpace: 'nowrap' }}>
+                      {/* Actions (View, Edit, Print, Reset matching Image 2) */}
+                      <td style={{ padding: '14px 20px', whiteSpace: 'nowrap' }}>
                         <div style={{ display: 'inline-flex', gap: '8px', alignItems: 'center' }}>
                           <button
                             type="button"
@@ -443,41 +395,39 @@ export default function StudentTable({
                         </div>
                       </td>
 
-                      {/* Department / College: Semibold Primary with Lighter Muted Subtitle */}
-                      <td style={{ padding: '19px 20px' }}>
-                        <div style={{ fontSize: '13.5px', fontWeight: 600, color: '#0f172a' }}>{stu.department || '—'}</div>
-                        <div style={{ fontSize: '12px', color: '#94a3b8', marginTop: '3px', fontWeight: 400 }}>{stu.yearLevel || 'Student'}</div>
+                      {/* Department / College */}
+                      <td style={{ padding: '14px 20px' }}>
+                        <div style={{ fontSize: '13px', fontWeight: 600, color: '#0f172a' }}>{stu.department || '—'}</div>
+                        <div style={{ fontSize: '11px', color: '#64748b', marginTop: '2px' }}>{stu.yearLevel || 'Student'}</div>
                       </td>
 
-                      {/* Civil Status & Age: Semibold Primary with Lighter Muted Subtitle */}
-                      <td style={{ padding: '19px 20px' }}>
-                        <div style={{ fontSize: '13.5px', color: '#0f172a', fontWeight: 600 }}>{isSingle}</div>
-                        <div style={{ fontSize: '12px', color: '#94a3b8', marginTop: '3px', fontWeight: 400 }}>{ageDisplay}</div>
+                      {/* Civil Status & Age */}
+                      <td style={{ padding: '14px 20px' }}>
+                        <div style={{ fontSize: '13px', color: '#0f172a', fontWeight: 500 }}>{isSingle}</div>
+                        <div style={{ fontSize: '11px', color: '#64748b', marginTop: '2px' }}>{ageDisplay}</div>
                       </td>
 
-                      {/* Status: Very Pale Pastel Green Badge */}
-                      <td style={{ padding: '19px 20px' }}>
+                      {/* Status */}
+                      <td style={{ padding: '14px 20px' }}>
                         <span
                           className="badge"
                           style={{
-                            display: 'inline-flex',
-                            alignItems: 'center',
-                            padding: '3px 10px',
+                            display: 'inline-block',
+                            padding: '4px 12px',
                             borderRadius: '9999px',
                             fontSize: '11px',
-                            fontWeight: 600,
+                            fontWeight: 700,
                             background: isActive ? '#dcfce7' : '#fee2e2',
-                            color: isActive ? '#15803d' : '#b91c1c',
-                            letterSpacing: '0.03em'
+                            color: isActive ? '#15803d' : '#b91c1c'
                           }}
                         >
                           {isActive ? 'Active' : 'Inactive'}
                         </span>
                       </td>
 
-                      {/* Last Updated: Lighter Muted Gray */}
-                      <td style={{ padding: '19px 20px' }}>
-                        <div style={{ fontSize: '12px', color: '#94a3b8', fontWeight: 400 }}>
+                      {/* Last Updated */}
+                      <td style={{ padding: '14px 20px' }}>
+                        <div style={{ fontSize: '12px', color: '#64748b' }}>
                           {stu.lastUpdated || 'Original record'}
                         </div>
                       </td>

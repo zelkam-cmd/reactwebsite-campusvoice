@@ -114,8 +114,8 @@
 .sidebar-section-title {
   padding: 0 12px 8px;
   font-size: 11px;
-  font-weight: 700 !important;
-  color: #94a3b8 !important;
+  font-weight: 800;
+  color: #64748b !important;
   text-transform: uppercase;
   letter-spacing: 0.08em;
 }
@@ -127,8 +127,8 @@
   gap: 12px;
   padding: 10px 14px;
   font-size: 14px;
-  font-weight: 500;
-  color: #cbd5e1 !important;
+  font-weight: 600;
+  color: #94a3b8 !important;
   border-radius: 12px;
   background: transparent;
   border: none;
@@ -146,29 +146,21 @@
 }
 
 .sidebar-link.active {
-  background: transparent !important;
+  background: linear-gradient(135deg, #0284c7 0%, #2563eb 100%) !important;
   color: #ffffff !important;
-  border-left: 3.5px solid #10b981 !important;
-  border-radius: 0 !important;
-  padding-left: 11px !important;
-  box-shadow: none !important;
-}
-
-.sidebar-link.active .sidebar-link-text {
-  font-weight: 600 !important;
-  color: #ffffff !important;
+  box-shadow: 0 4px 16px rgba(2, 132, 199, 0.4) !important;
 }
 
 .sidebar-link svg {
   width: 18px;
   height: 18px;
   flex-shrink: 0;
-  color: #94a3b8 !important;
+  color: #64748b !important;
   transition: color 0.2s ease;
 }
 
 .sidebar-link:hover svg {
-  color: #ffffff !important;
+  color: #38bdf8 !important;
 }
 
 .sidebar-link.active svg {
@@ -181,8 +173,8 @@
 
 /* System Health Widget */
 .system-health-widget {
-  margin: 28px 6px 16px;
-  padding: 18px 16px;
+  margin: 18px 6px 10px;
+  padding: 14px;
   background: rgba(255, 255, 255, 0.05);
   border: 1px solid rgba(255, 255, 255, 0.1);
   border-radius: 14px;

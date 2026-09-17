@@ -17,7 +17,7 @@ export default function AppHeader({ title = 'Student Information & Registry' }) 
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'space-between',
-        padding: '7px 24px 0 24px',
+        padding: '0 24px',
         marginBottom: '24px',
         boxShadow: '0 4px 24px rgba(0, 0, 0, 0.05)'
       }}
