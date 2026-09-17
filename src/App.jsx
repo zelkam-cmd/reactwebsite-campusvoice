@@ -103,12 +103,19 @@ export default function App() {
     if (viewMode === 'add') {
       const newStudent = {
         ...studentData,
-        id: studentData.accountNumber || `STU-2024-${String(Date.now()).slice(-3)}`,
-        createdAt: 'Today',
+        id: studentData.accountNumber || studentData.studentNumber || `STU-2024-${String(Date.now()).slice(-3)}`,
+        accountNumber: studentData.accountNumber || studentData.studentNumber,
+        studentNumber: studentData.studentNumber || studentData.accountNumber,
+        createdAt: new Date().toLocaleDateString('en-US', { month: 'short', day: '2-digit', year: 'numeric' }),
+        updatedAt: 'Just now',
         lastUpdated: 'Just now'
       };
       setStudents([newStudent, ...students]);
-      showToast(`Student ${newStudent.name} added successfully!`);
+      showToast(`Student ${newStudent.name} added! Default password is set to their Student ID.`);
+      setSelectedStudent(newStudent);
+      setViewMode('detail');
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+      return;
     } else if (viewMode === 'edit') {
       setStudents(
         students.map((s) => {
@@ -195,6 +202,7 @@ export default function App() {
             <StudentAdd
               onSave={handleSaveStudent}
               onCancel={() => { setViewMode('list'); setSelectedStudent(null); }}
+              existingStudents={students}
             />
           )}
 
