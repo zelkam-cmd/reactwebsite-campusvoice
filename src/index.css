@@ -1034,6 +1034,22 @@ button { cursor: pointer; border: none; background: none; }
 
 .sidebar-link-text { flex: 1; }
 
+.sidebar-link.disabled {
+    opacity: 0.55 !important;
+    cursor: not-allowed !important;
+    pointer-events: auto !important;
+}
+
+.sidebar-link.disabled:hover {
+    background: transparent !important;
+    color: #94A3B8 !important;
+    transform: none !important;
+}
+
+.sidebar-link.disabled:hover svg {
+    color: #64748B !important;
+}
+
 .sidebar-footer {
     padding: 16px;
     border-top: 1px solid rgba(255, 255, 255, 0.08) !important;
