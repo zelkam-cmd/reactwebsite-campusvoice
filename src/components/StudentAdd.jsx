@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { DEPARTMENTS, CIVIL_STATUSES, YEAR_LEVELS } from '../data/initialStudents';
 
-export default function StudentAdd({ onSave, onCancel, existingStudents = [] }) {
+export default function StudentAdd({ onSave, onCancel, onNavigateDashboard, existingStudents = [] }) {
   const [formData, setFormData] = useState({
     studentNumber: '',
     firstName: '',
@@ -105,7 +105,7 @@ export default function StudentAdd({ onSave, onCancel, existingStudents = [] }) 
         }}
       >
         <div className="breadcrumb-item">
-          <span style={{ color: '#0284c7', cursor: 'pointer' }} onClick={onCancel}>Dashboard</span>
+          <span style={{ color: '#0284c7', cursor: 'pointer' }} onClick={onNavigateDashboard || onCancel}>Dashboard</span>
         </div>
         <span className="breadcrumb-separator" style={{ color: '#94a3b8' }}>▸</span>
         <div className="breadcrumb-item">

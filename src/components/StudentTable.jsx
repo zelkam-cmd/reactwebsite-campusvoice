@@ -7,7 +7,8 @@ export default function StudentTable({
   onEdit,
   onDelete,
   onAdd,
-  onPrint
+  onPrint,
+  onNavigateDashboard
 }) {
   const [search, setSearch] = useState('');
   const [deptFilter, setDeptFilter] = useState('');
@@ -72,7 +73,17 @@ export default function StudentTable({
     <div className="student-registry-page">
       {/* Breadcrumbs */}
       <div className="breadcrumbs">
-        <div className="breadcrumb-item"><a href="#dashboard" onClick={(e) => e.preventDefault()}>Dashboard</a></div>
+        <div className="breadcrumb-item">
+          <a
+            href="#dashboard"
+            onClick={(e) => {
+              e.preventDefault();
+              if (onNavigateDashboard) onNavigateDashboard();
+            }}
+          >
+            Dashboard
+          </a>
+        </div>
         <span className="breadcrumb-separator">▸</span>
         <div className="breadcrumb-item active">Student Registry</div>
       </div>

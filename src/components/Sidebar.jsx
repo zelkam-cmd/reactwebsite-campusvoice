@@ -1,6 +1,6 @@
 import React from 'react';
 
-export default function Sidebar({ onNavigateStudents }) {
+export default function Sidebar({ currentView, onNavigateDashboard, onNavigateStudents }) {
   return (
     <aside className="app-sidebar" id="sidebar">
       {/* Brand Header */}
@@ -23,7 +23,12 @@ export default function Sidebar({ onNavigateStudents }) {
         <div className="sidebar-section">
           <div className="sidebar-section-title">Overview</div>
 
-          <div className="sidebar-link disabled" title="Inactive for profiling activity">
+          <button
+            type="button"
+            className={`sidebar-link ${currentView === 'dashboard' ? 'active' : ''}`}
+            onClick={onNavigateDashboard}
+            title="Admin Command Center"
+          >
             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
               <rect x="3" y="3" width="7" height="7" />
               <rect x="14" y="3" width="7" height="7" />
@@ -31,7 +36,7 @@ export default function Sidebar({ onNavigateStudents }) {
               <rect x="3" y="14" width="7" height="7" />
             </svg>
             <span className="sidebar-link-text">Dashboard</span>
-          </div>
+          </button>
         </div>
 
         {/* SURVEY MANAGEMENT SECTION */}
@@ -72,7 +77,7 @@ export default function Sidebar({ onNavigateStudents }) {
 
           <button
             type="button"
-            className="sidebar-link active"
+            className={`sidebar-link ${['list', 'add', 'edit', 'detail', 'print'].includes(currentView) ? 'active' : ''}`}
             onClick={onNavigateStudents}
             title="Student Registry & Profiling"
           >

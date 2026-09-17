@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { DEPARTMENTS, CIVIL_STATUSES, YEAR_LEVELS } from '../data/initialStudents';
 
-export default function StudentEdit({ student, onSave, onCancel }) {
+export default function StudentEdit({ student, onSave, onCancel, onNavigateDashboard }) {
   const [formData, setFormData] = useState({
     accountNumber: student?.accountNumber || student?.id || '',
     firstName: student?.firstName || student?.name?.split(' ')[0] || '',
@@ -122,7 +122,7 @@ export default function StudentEdit({ student, onSave, onCancel }) {
       {/* Breadcrumbs matching Image 2 */}
       <div className="breadcrumbs" style={{ display: 'flex', alignItems: 'center', gap: '8px', fontSize: '13px', marginBottom: '14px' }}>
         <div className="breadcrumb-item">
-          <span style={{ color: '#0284c7', cursor: 'pointer', fontWeight: 600 }} onClick={onCancel}>Dashboard</span>
+          <span style={{ color: '#0284c7', cursor: 'pointer', fontWeight: 600 }} onClick={onNavigateDashboard || onCancel}>Dashboard</span>
         </div>
         <span className="breadcrumb-separator" style={{ color: '#94a3b8' }}>▸</span>
         <div className="breadcrumb-item">
