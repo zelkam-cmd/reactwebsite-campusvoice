@@ -222,7 +222,7 @@ export default function App() {
           className="app-footer"
           style={{
             marginTop: '36px',
-            padding: '24px 8px 16px 8px',
+            padding: '24px 0 16px 0',
             display: 'flex',
             justifyContent: 'space-between',
             alignItems: 'center',

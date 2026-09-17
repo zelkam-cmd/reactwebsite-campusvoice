@@ -146,16 +146,16 @@
 }
 
 .sidebar-link.active {
-  background: rgba(255, 255, 255, 0.14) !important;
+  background: transparent !important;
   color: #ffffff !important;
   border-left: 3.5px solid #10b981 !important;
-  border-radius: 10px !important;
+  border-radius: 0 !important;
   padding-left: 11px !important;
-  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.15) !important;
+  box-shadow: none !important;
 }
 
 .sidebar-link.active .sidebar-link-text {
-  font-weight: 700 !important;
+  font-weight: 600 !important;
   color: #ffffff !important;
 }
 
@@ -181,8 +181,8 @@
 
 /* System Health Widget */
 .system-health-widget {
-  margin: 18px 6px 10px;
-  padding: 14px;
+  margin: 28px 6px 16px;
+  padding: 18px 16px;
   background: rgba(255, 255, 255, 0.05);
   border: 1px solid rgba(255, 255, 255, 0.1);
   border-radius: 14px;

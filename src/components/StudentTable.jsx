@@ -110,7 +110,7 @@ export default function StudentTable({
           style={{
             display: 'flex',
             flexWrap: 'wrap',
-            gap: '12px',
+            gap: '24px',
             alignItems: 'center',
             justifyContent: 'flex-start',
             padding: '18px 24px',
@@ -134,7 +134,7 @@ export default function StudentTable({
                 paddingLeft: '40px',
                 paddingRight: '14px',
                 borderRadius: '12px',
-                height: '44px',
+                height: '46px',
                 background: '#ffffff',
                 border: '1px solid #e2e8f0',
                 fontSize: '13px',
@@ -149,16 +149,16 @@ export default function StudentTable({
             />
           </div>
 
-          {/* Filter Dropdowns with spacious vertical padding */}
-          <div style={{ display: 'flex', gap: '8px', flexWrap: 'wrap', alignItems: 'center' }}>
+          {/* Filter Dropdowns with spacious vertical padding and lightened carets */}
+          <div style={{ display: 'flex', gap: '10px', flexWrap: 'wrap', alignItems: 'center' }}>
             {/* Sort Filter */}
             <select
               className="form-select"
               style={{
                 width: 'auto',
                 fontSize: '13px',
-                height: '44px',
-                padding: '10px 36px 10px 14px',
+                height: '46px',
+                padding: '12px 38px 12px 14px',
                 lineHeight: '1.4',
                 borderRadius: '12px',
                 background: '#ffffff',
@@ -167,7 +167,14 @@ export default function StudentTable({
                 boxShadow: '0 1px 2px rgba(0,0,0,0.02)',
                 cursor: 'pointer',
                 outline: 'none',
-                boxSizing: 'border-box'
+                boxSizing: 'border-box',
+                appearance: 'none',
+                WebkitAppearance: 'none',
+                MozAppearance: 'none',
+                backgroundImage: `url("data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%2212%22%20height%3D%2212%22%20viewBox%3D%220%200%2024%2024%22%20fill%3D%22none%22%20stroke%3D%22%2394a3b8%22%20stroke-width%3D%222.2%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%3Cpolyline%20points%3D%226%209%2012%2015%2018%209%22%3E%3C%2Fpolyline%3E%3C%2Fsvg%3E")`,
+                backgroundRepeat: 'no-repeat',
+                backgroundPosition: 'right 14px center',
+                backgroundSize: '12px 12px'
               }}
               value={sortBy}
               onChange={(e) => setSortBy(e.target.value)}
@@ -184,8 +191,8 @@ export default function StudentTable({
               style={{
                 width: 'auto',
                 fontSize: '13px',
-                height: '44px',
-                padding: '10px 36px 10px 14px',
+                height: '46px',
+                padding: '12px 38px 12px 14px',
                 lineHeight: '1.4',
                 borderRadius: '12px',
                 background: '#ffffff',
@@ -194,7 +201,14 @@ export default function StudentTable({
                 boxShadow: '0 1px 2px rgba(0,0,0,0.02)',
                 cursor: 'pointer',
                 outline: 'none',
-                boxSizing: 'border-box'
+                boxSizing: 'border-box',
+                appearance: 'none',
+                WebkitAppearance: 'none',
+                MozAppearance: 'none',
+                backgroundImage: `url("data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%2212%22%20height%3D%2212%22%20viewBox%3D%220%200%2024%2024%22%20fill%3D%22none%22%20stroke%3D%22%2394a3b8%22%20stroke-width%3D%222.2%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%3Cpolyline%20points%3D%226%209%2012%2015%2018%209%22%3E%3C%2Fpolyline%3E%3C%2Fsvg%3E")`,
+                backgroundRepeat: 'no-repeat',
+                backgroundPosition: 'right 14px center',
+                backgroundSize: '12px 12px'
               }}
               value={deptFilter}
               onChange={(e) => setDeptFilter(e.target.value)}
@@ -211,8 +225,8 @@ export default function StudentTable({
               style={{
                 width: 'auto',
                 fontSize: '13px',
-                height: '44px',
-                padding: '10px 36px 10px 14px',
+                height: '46px',
+                padding: '12px 38px 12px 14px',
                 lineHeight: '1.4',
                 borderRadius: '12px',
                 background: '#ffffff',
@@ -221,7 +235,14 @@ export default function StudentTable({
                 boxShadow: '0 1px 2px rgba(0,0,0,0.02)',
                 cursor: 'pointer',
                 outline: 'none',
-                boxSizing: 'border-box'
+                boxSizing: 'border-box',
+                appearance: 'none',
+                WebkitAppearance: 'none',
+                MozAppearance: 'none',
+                backgroundImage: `url("data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%2212%22%20height%3D%2212%22%20viewBox%3D%220%200%2024%2024%22%20fill%3D%22none%22%20stroke%3D%22%2394a3b8%22%20stroke-width%3D%222.2%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%3Cpolyline%20points%3D%226%209%2012%2015%2018%209%22%3E%3C%2Fpolyline%3E%3C%2Fsvg%3E")`,
+                backgroundRepeat: 'no-repeat',
+                backgroundPosition: 'right 14px center',
+                backgroundSize: '12px 12px'
               }}
               value={civilFilter}
               onChange={(e) => setCivilFilter(e.target.value)}
@@ -238,8 +259,8 @@ export default function StudentTable({
               style={{
                 width: 'auto',
                 fontSize: '13px',
-                height: '44px',
-                padding: '10px 36px 10px 14px',
+                height: '46px',
+                padding: '12px 38px 12px 14px',
                 lineHeight: '1.4',
                 borderRadius: '12px',
                 background: '#ffffff',
@@ -248,7 +269,14 @@ export default function StudentTable({
                 boxShadow: '0 1px 2px rgba(0,0,0,0.02)',
                 cursor: 'pointer',
                 outline: 'none',
-                boxSizing: 'border-box'
+                boxSizing: 'border-box',
+                appearance: 'none',
+                WebkitAppearance: 'none',
+                MozAppearance: 'none',
+                backgroundImage: `url("data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%2212%22%20height%3D%2212%22%20viewBox%3D%220%200%2024%2024%22%20fill%3D%22none%22%20stroke%3D%22%2394a3b8%22%20stroke-width%3D%222.2%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%3Cpolyline%20points%3D%226%209%2012%2015%2018%209%22%3E%3C%2Fpolyline%3E%3C%2Fsvg%3E")`,
+                backgroundRepeat: 'no-repeat',
+                backgroundPosition: 'right 14px center',
+                backgroundSize: '12px 12px'
               }}
               value={statusFilter}
               onChange={(e) => setStatusFilter(e.target.value)}
@@ -265,14 +293,14 @@ export default function StudentTable({
           <table className="data-table" style={{ width: '100%', minWidth: '950px', borderCollapse: 'collapse' }}>
             <thead>
               <tr style={{ background: 'rgba(248, 250, 252, 0.5)', borderBottom: '1px solid #e2e8f0' }}>
-                <th style={{ width: '55px', padding: '14px 20px', textAlign: 'left', fontSize: '11px', fontWeight: 600, color: '#64748b', textTransform: 'uppercase', letterSpacing: '0.06em' }}>PHOTO</th>
-                <th style={{ padding: '14px 20px', textAlign: 'left', fontSize: '11px', fontWeight: 600, color: '#64748b', textTransform: 'uppercase', letterSpacing: '0.06em' }}>STUDENT ID</th>
-                <th style={{ padding: '14px 20px', textAlign: 'left', fontSize: '11px', fontWeight: 600, color: '#64748b', textTransform: 'uppercase', letterSpacing: '0.06em' }}>FULL NAME &amp; CONTACT</th>
-                <th style={{ padding: '14px 20px', textAlign: 'left', fontSize: '11px', fontWeight: 600, color: '#64748b', textTransform: 'uppercase', letterSpacing: '0.06em', whiteSpace: 'nowrap' }}>ACTIONS</th>
-                <th style={{ padding: '14px 20px', textAlign: 'left', fontSize: '11px', fontWeight: 600, color: '#64748b', textTransform: 'uppercase', letterSpacing: '0.06em' }}>DEPARTMENT / COLLEGE</th>
-                <th style={{ padding: '14px 20px', textAlign: 'left', fontSize: '11px', fontWeight: 600, color: '#64748b', textTransform: 'uppercase', letterSpacing: '0.06em' }}>CIVIL STATUS &amp; AGE</th>
-                <th style={{ padding: '14px 20px', textAlign: 'left', fontSize: '11px', fontWeight: 600, color: '#64748b', textTransform: 'uppercase', letterSpacing: '0.06em' }}>STATUS</th>
-                <th style={{ padding: '14px 20px', textAlign: 'left', fontSize: '11px', fontWeight: 600, color: '#64748b', textTransform: 'uppercase', letterSpacing: '0.06em' }}>LAST UPDATED</th>
+                <th style={{ width: '55px', padding: '14px 20px', textAlign: 'left', fontSize: '11px', fontWeight: 500, color: '#64748b', textTransform: 'uppercase', letterSpacing: '0.06em' }}>PHOTO</th>
+                <th style={{ padding: '14px 20px', textAlign: 'left', fontSize: '11px', fontWeight: 500, color: '#64748b', textTransform: 'uppercase', letterSpacing: '0.06em' }}>STUDENT ID</th>
+                <th style={{ padding: '14px 20px', textAlign: 'left', fontSize: '11px', fontWeight: 500, color: '#64748b', textTransform: 'uppercase', letterSpacing: '0.06em' }}>FULL NAME &amp; CONTACT</th>
+                <th style={{ padding: '14px 20px', textAlign: 'left', fontSize: '11px', fontWeight: 500, color: '#64748b', textTransform: 'uppercase', letterSpacing: '0.06em', whiteSpace: 'nowrap' }}>ACTIONS</th>
+                <th style={{ padding: '14px 20px', textAlign: 'left', fontSize: '11px', fontWeight: 500, color: '#64748b', textTransform: 'uppercase', letterSpacing: '0.06em' }}>DEPARTMENT / COLLEGE</th>
+                <th style={{ padding: '14px 20px', textAlign: 'left', fontSize: '11px', fontWeight: 500, color: '#64748b', textTransform: 'uppercase', letterSpacing: '0.06em' }}>CIVIL STATUS &amp; AGE</th>
+                <th style={{ padding: '14px 20px', textAlign: 'left', fontSize: '11px', fontWeight: 500, color: '#64748b', textTransform: 'uppercase', letterSpacing: '0.06em' }}>STATUS</th>
+                <th style={{ padding: '14px 20px', textAlign: 'left', fontSize: '11px', fontWeight: 500, color: '#64748b', textTransform: 'uppercase', letterSpacing: '0.06em' }}>LAST UPDATED</th>
               </tr>
             </thead>
             <tbody>
@@ -294,13 +322,13 @@ export default function StudentTable({
                   const isActive = (stu.status || 'active').toLowerCase() === 'active';
 
                   return (
-                    <tr key={studentId} style={{ borderBottom: '1px solid rgba(226, 232, 240, 0.45)' }} className="student-table-row">
-                      {/* Photo: Circular Avatar with Bold Initials */}
+                    <tr key={studentId} style={{ borderBottom: '1px solid rgba(226, 232, 240, 0.35)' }} className="student-table-row">
+                      {/* Photo: Circular Avatar with Smaller, Bolder Initials */}
                       <td style={{ padding: '19px 20px' }}>
                         <div
                           style={{
-                            width: '40px',
-                            height: '40px',
+                            width: '38px',
+                            height: '38px',
                             borderRadius: '50%',
                             background: '#e0f2fe',
                             color: '#0284c7',
@@ -308,26 +336,27 @@ export default function StudentTable({
                             alignItems: 'center',
                             justifyContent: 'center',
                             fontWeight: 800,
-                            fontSize: '13px'
+                            fontSize: '11.5px',
+                            letterSpacing: '-0.02em'
                           }}
                         >
                           {initials}
                         </div>
                       </td>
 
-                      {/* Student ID: Bold Primary Accent */}
+                      {/* Student ID: Semibold (font-weight: 600) */}
                       <td style={{ padding: '19px 20px' }}>
                         <span
-                          style={{ fontWeight: 700, color: '#0284c7', cursor: 'pointer', fontSize: '13.5px' }}
+                          style={{ fontWeight: 600, color: '#0284c7', cursor: 'pointer', fontSize: '13.5px' }}
                           onClick={() => onView(stu)}
                         >
                           {studentId}
                         </span>
                       </td>
 
-                      {/* Full Name (Bold) & Secondary Contact (Muted Gray) */}
+                      {/* Full Name: Semibold (font-weight: 600) & Secondary Contact: Lighter Muted Gray */}
                       <td style={{ padding: '19px 20px' }}>
-                        <div style={{ fontWeight: 700, color: '#0f172a', fontSize: '14px' }}>{stu.name}</div>
+                        <div style={{ fontWeight: 600, color: '#0f172a', fontSize: '14px' }}>{stu.name}</div>
                         <div style={{ fontSize: '12px', color: '#94a3b8', marginTop: '3px', fontWeight: 400 }}>
                           {stu.email || 'No email'} • {stu.contact || 'No mobile'}
                         </div>
@@ -414,31 +443,31 @@ export default function StudentTable({
                         </div>
                       </td>
 
-                      {/* Department / College: Bold Primary with Muted Subtitle */}
+                      {/* Department / College: Semibold Primary with Lighter Muted Subtitle */}
                       <td style={{ padding: '19px 20px' }}>
                         <div style={{ fontSize: '13.5px', fontWeight: 600, color: '#0f172a' }}>{stu.department || '—'}</div>
                         <div style={{ fontSize: '12px', color: '#94a3b8', marginTop: '3px', fontWeight: 400 }}>{stu.yearLevel || 'Student'}</div>
                       </td>
 
-                      {/* Civil Status & Age */}
+                      {/* Civil Status & Age: Semibold Primary with Lighter Muted Subtitle */}
                       <td style={{ padding: '19px 20px' }}>
                         <div style={{ fontSize: '13.5px', color: '#0f172a', fontWeight: 600 }}>{isSingle}</div>
                         <div style={{ fontSize: '12px', color: '#94a3b8', marginTop: '3px', fontWeight: 400 }}>{ageDisplay}</div>
                       </td>
 
-                      {/* Status: Soft Pastel Green Badge */}
+                      {/* Status: Very Pale Pastel Green Badge */}
                       <td style={{ padding: '19px 20px' }}>
                         <span
                           className="badge"
                           style={{
                             display: 'inline-flex',
                             alignItems: 'center',
-                            padding: '3px 11px',
+                            padding: '3px 10px',
                             borderRadius: '9999px',
                             fontSize: '11px',
                             fontWeight: 600,
-                            background: isActive ? '#ecfdf5' : '#fef2f2',
-                            color: isActive ? '#059669' : '#dc2626',
+                            background: isActive ? '#dcfce7' : '#fee2e2',
+                            color: isActive ? '#15803d' : '#b91c1c',
                             letterSpacing: '0.03em'
                           }}
                         >
@@ -446,7 +475,7 @@ export default function StudentTable({
                         </span>
                       </td>
 
-                      {/* Last Updated: Muted Lighter Gray */}
+                      {/* Last Updated: Lighter Muted Gray */}
                       <td style={{ padding: '19px 20px' }}>
                         <div style={{ fontSize: '12px', color: '#94a3b8', fontWeight: 400 }}>
                           {stu.lastUpdated || 'Original record'}
