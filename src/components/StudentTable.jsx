@@ -8,6 +8,7 @@ export default function StudentTable({
   onDelete,
   onAdd,
   onPrint,
+  onResetPassword,
   onNavigateDashboard
 }) {
   const [search, setSearch] = useState('');
@@ -388,9 +389,13 @@ export default function StudentTable({
                             type="button"
                             className="btn btn-ghost btn-sm text-warning"
                             onClick={() => {
-                              const confirmed = window.confirm(`Reset password for ${stu.name} to Student ID?`);
-                              if (confirmed) {
-                                alert(`Password for ${stu.name} has been reset to Student ID (${studentId}).`);
+                              if (onResetPassword) {
+                                onResetPassword(stu);
+                              } else {
+                                const confirmed = window.confirm(`Reset password for ${stu.name} to Student ID?`);
+                                if (confirmed) {
+                                  alert(`Password for ${stu.name} has been reset to Student ID (${studentId}).`);
+                                }
                               }
                             }}
                             style={{

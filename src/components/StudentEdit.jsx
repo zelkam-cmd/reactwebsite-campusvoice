@@ -28,14 +28,20 @@ export default function StudentEdit({ student, onSave, onCancel, onNavigateDashb
     status: student?.status || 'active'
   });
 
-  const [children, setChildren] = useState([
-    { name: '', age: '' }
-  ]);
+  const [children, setChildren] = useState(
+    student?.dependents && student.dependents.length > 0
+      ? student.dependents
+      : [{ name: '', age: '' }]
+  );
 
-  const [references, setReferences] = useState([
-    { name: 'Faculty Adviser', affiliation: 'Faculty / Instructor', contact: '09170000000' },
-    { name: 'Department Chair', affiliation: 'College Department', contact: '09180000000' }
-  ]);
+  const [references, setReferences] = useState(
+    student?.references && student.references.length > 0
+      ? student.references
+      : [
+          { name: 'Faculty Adviser', affiliation: 'Faculty / Instructor', contact: '09170000000' },
+          { name: 'Department Chair', affiliation: 'College Department', contact: '09180000000' }
+        ]
+  );
 
   const [photoPreview, setPhotoPreview] = useState(null);
   const [signaturePreview, setSignaturePreview] = useState(null);
@@ -112,6 +118,8 @@ export default function StudentEdit({ student, onSave, onCancel, onNavigateDashb
       spouseOccupation: formData.spouseOccupation,
       spouseEmployer: formData.spouseEmployer,
       status: formData.status,
+      dependents: children.filter((c) => c.name && c.name.trim()),
+      references: references,
       updatedAt: 'Just now',
       lastUpdated: 'Just now'
     });

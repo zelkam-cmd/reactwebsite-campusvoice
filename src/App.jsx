@@ -87,15 +87,31 @@ export default function App() {
     }
   };
 
-  // Delete student logic
+  // Delete student logic (matching delete.php)
   const handleConfirmDelete = (studentId) => {
-    const studentToDelete = students.find((s) => (s.id === studentId || s.accountNumber === studentId));
-    setStudents(students.filter((s) => s.id !== studentId && s.accountNumber !== studentId));
+    const studentToDelete = students.find((s) => (s.id === studentId || s.accountNumber === studentId || s.studentNumber === studentId));
+    const stuNum = studentToDelete?.studentNumber || studentToDelete?.accountNumber || studentId;
+    setStudents(students.filter((s) => s.id !== studentId && s.accountNumber !== studentId && s.studentNumber !== studentId));
     if (viewMode === 'detail' || viewMode === 'edit' || viewMode === 'print') {
       setViewMode('list');
       setSelectedStudent(null);
     }
-    showToast(`Student record for ${studentToDelete?.name || studentId} was deleted successfully.`);
+    showToast(`Student record for ${stuNum} was deleted successfully.`);
+  };
+
+  // Reset password handler (matching reset_password.php)
+  const handleResetPassword = (student) => {
+    const studentId = student.accountNumber || student.studentNumber || student.id;
+    const confirmed = window.confirm(`Reset password for ${student.name} to Student ID?`);
+    if (confirmed) {
+      setStudents((prev) =>
+        prev.map((s) => {
+          const match = (s.id && s.id === student.id) || (s.accountNumber && s.accountNumber === studentId);
+          return match ? { ...s, mustChangePassword: true } : s;
+        })
+      );
+      showToast(`Password reset successfully! Default password is set to Student ID: ${studentId}`);
+    }
   };
 
   // Save student (Add or Edit)
@@ -106,6 +122,7 @@ export default function App() {
         id: studentData.accountNumber || studentData.studentNumber || `STU-2024-${String(Date.now()).slice(-3)}`,
         accountNumber: studentData.accountNumber || studentData.studentNumber,
         studentNumber: studentData.studentNumber || studentData.accountNumber,
+        mustChangePassword: true,
         createdAt: new Date().toLocaleDateString('en-US', { month: 'short', day: '2-digit', year: 'numeric' }),
         updatedAt: 'Just now',
         lastUpdated: 'Just now'
@@ -117,13 +134,17 @@ export default function App() {
       window.scrollTo({ top: 0, behavior: 'smooth' });
       return;
     } else if (viewMode === 'edit') {
-      setStudents(
-        students.map((s) => {
-          const matchId = (s.id && s.id === studentData.id) || (s.accountNumber && s.accountNumber === studentData.accountNumber);
-          return matchId ? { ...s, ...studentData } : s;
-        })
-      );
-      showToast(`Student record for ${studentData.name} updated successfully!`);
+      const updatedList = students.map((s) => {
+        const matchId = (s.id && s.id === studentData.id) || (s.accountNumber && s.accountNumber === studentData.accountNumber);
+        return matchId ? { ...s, ...studentData, lastUpdated: 'Just now', updatedAt: 'Just now' } : s;
+      });
+      setStudents(updatedList);
+      showToast('Student record updated successfully!');
+      const updatedStudent = updatedList.find((s) => (s.id && s.id === studentData.id) || (s.accountNumber && s.accountNumber === studentData.accountNumber)) || studentData;
+      setSelectedStudent(updatedStudent);
+      setViewMode('detail');
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+      return;
     }
     setViewMode('list');
     setSelectedStudent(null);
@@ -195,6 +216,7 @@ export default function App() {
                 onDelete={handleOpenDelete}
                 onAdd={handleOpenAdd}
                 onPrint={handleOpenPrint}
+                onResetPassword={handleResetPassword}
               />
             )}
 
@@ -220,6 +242,7 @@ export default function App() {
                 onEdit={handleOpenEdit}
                 onDelete={handleOpenDelete}
                 onPrint={handleOpenPrint}
+                onResetPassword={handleResetPassword}
                 onBack={handleNavigateStudents}
               />
             )}

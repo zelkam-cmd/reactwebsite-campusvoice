@@ -264,13 +264,36 @@ export default function StudentPrint({ student, onBack }) {
           </tbody>
         </table>
 
-        {/* Children / Dependents note */}
+        {/* Children / Dependents */}
         <div style={{ fontSize: '9.5pt', fontWeight: 700, color: '#334155', margin: '6px 0 2px 0' }}>
           Children / Dependents:
         </div>
-        <div style={{ fontSize: '9pt', color: '#64748b', fontStyle: 'italic', marginBottom: '14px' }}>
-          No dependents registered.
-        </div>
+        {student.dependents && student.dependents.filter((d) => d.name && d.name.trim()).length > 0 ? (
+          <table style={{ width: '100%', borderCollapse: 'collapse', fontSize: '9.5pt', marginBottom: '14px' }}>
+            <thead>
+              <tr style={{ background: '#f1f5f9' }}>
+                <th style={{ width: '70%', padding: '6px 10px', border: '1px solid #cbd5e1', textAlign: 'left', fontWeight: 700 }}>
+                  Child / Dependent Full Name
+                </th>
+                <th style={{ width: '30%', padding: '6px 10px', border: '1px solid #cbd5e1', textAlign: 'left', fontWeight: 700 }}>
+                  Age
+                </th>
+              </tr>
+            </thead>
+            <tbody>
+              {student.dependents.filter((d) => d.name && d.name.trim()).map((dep, idx) => (
+                <tr key={idx}>
+                  <td style={{ padding: '6px 10px', border: '1px solid #cbd5e1' }}>{dep.name}</td>
+                  <td style={{ padding: '6px 10px', border: '1px solid #cbd5e1' }}>{dep.age} years old</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        ) : (
+          <div style={{ fontSize: '9pt', color: '#64748b', fontStyle: 'italic', marginBottom: '14px', padding: '4px 0' }}>
+            No dependents registered.
+          </div>
+        )}
 
         {/* Section III: Character / Member References */}
         <div
@@ -304,16 +327,19 @@ export default function StudentPrint({ student, onBack }) {
             </tr>
           </thead>
           <tbody>
-            <tr>
-              <td style={{ padding: '6px 10px', border: '1px solid #cbd5e1', fontWeight: 600 }}>Faculty Adviser</td>
-              <td style={{ padding: '6px 10px', border: '1px solid #cbd5e1' }}>Faculty / Instructor</td>
-              <td style={{ padding: '6px 10px', border: '1px solid #cbd5e1' }}>09170000000</td>
-            </tr>
-            <tr>
-              <td style={{ padding: '6px 10px', border: '1px solid #cbd5e1', fontWeight: 600 }}>Department Chair</td>
-              <td style={{ padding: '6px 10px', border: '1px solid #cbd5e1' }}>College Department</td>
-              <td style={{ padding: '6px 10px', border: '1px solid #cbd5e1' }}>09180000000</td>
-            </tr>
+            {(student.references && student.references.length > 0
+              ? student.references
+              : [
+                  { name: 'Faculty Adviser', affiliation: 'Faculty / Instructor', contact: '09170000000' },
+                  { name: 'Department Chair', affiliation: 'College Department', contact: '09180000000' }
+                ]
+            ).map((ref, idx) => (
+              <tr key={idx}>
+                <td style={{ padding: '6px 10px', border: '1px solid #cbd5e1', fontWeight: 600 }}>{ref.name}</td>
+                <td style={{ padding: '6px 10px', border: '1px solid #cbd5e1' }}>{ref.affiliation || 'Faculty / Member'}</td>
+                <td style={{ padding: '6px 10px', border: '1px solid #cbd5e1' }}>{ref.contact}</td>
+              </tr>
+            ))}
           </tbody>
         </table>
 

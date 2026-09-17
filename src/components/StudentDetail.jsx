@@ -1,13 +1,13 @@
 import React from 'react';
 
-export default function StudentDetail({ student, onEdit, onDelete, onPrint, onBack, onNavigateDashboard }) {
+export default function StudentDetail({ student, onEdit, onDelete, onPrint, onResetPassword, onBack, onNavigateDashboard }) {
   if (!student) return null;
 
   const initials = student.name
     ? student.name.split(' ').map((n) => n[0]).join('').slice(0, 2).toUpperCase()
     : 'ST';
 
-  const isCompletedPW = true;
+  const isPendingPW = !!student.mustChangePassword;
   const isActive = (student.status || 'active').toLowerCase() === 'active';
 
   // Format birthdate nicely (e.g., Sep 01, 2003)
@@ -147,19 +147,23 @@ export default function StudentDetail({ student, onEdit, onDelete, onPrint, onBa
             </button>
             <button
               type="button"
-              className="btn btn-ghost"
+              className="btn btn-warning btn-sm"
               onClick={() => {
-                const confirmed = window.confirm('Reset password to Student ID?');
-                if (confirmed) {
-                  alert(`Password has been reset to Student ID (${student.accountNumber || student.id}).`);
+                if (onResetPassword) {
+                  onResetPassword(student);
+                } else {
+                  const confirmed = window.confirm('Reset password to Student ID?');
+                  if (confirmed) {
+                    alert(`Password has been reset to Student ID (${student.accountNumber || student.studentNumber || student.id}).`);
+                  }
                 }
               }}
               style={{
-                background: 'transparent',
-                color: '#0284c7',
-                border: 'none',
+                background: '#fef3c7',
+                color: '#d97706',
+                border: '1px solid #fde68a',
                 borderRadius: '9999px',
-                padding: '9px 14px',
+                padding: '9px 18px',
                 fontWeight: 600,
                 fontSize: '14px',
                 cursor: 'pointer'
@@ -169,7 +173,7 @@ export default function StudentDetail({ student, onEdit, onDelete, onPrint, onBa
             </button>
             <button
               type="button"
-              className="btn btn-ghost"
+              className="btn btn-ghost btn-sm text-error"
               onClick={() => onDelete(student)}
               style={{
                 background: 'transparent',
@@ -294,12 +298,33 @@ export default function StudentDetail({ student, onEdit, onDelete, onPrint, onBa
                 </table>
 
                 <div style={{ padding: '20px 26px', borderTop: '1px solid rgba(226, 232, 240, 0.5)' }}>
-                  <div style={{ fontSize: '14px', fontWeight: 700, color: '#334155', marginBottom: '6px' }}>
+                  <div style={{ fontSize: '14px', fontWeight: 700, color: '#334155', marginBottom: '8px' }}>
                     Registered Children / Dependents:
                   </div>
-                  <div style={{ fontSize: '13px', color: '#94a3b8', fontStyle: 'italic' }}>
-                    No dependents registered.
-                  </div>
+                  {student.dependents && student.dependents.filter((d) => d.name && d.name.trim()).length > 0 ? (
+                    <div style={{ overflowX: 'auto' }}>
+                      <table style={{ width: '100%', borderCollapse: 'separate', borderSpacing: 0, fontSize: '13px' }}>
+                        <thead>
+                          <tr style={{ background: '#f8fafc' }}>
+                            <th style={{ padding: '10px 14px', textAlign: 'left', fontWeight: 700, color: '#475569', borderBottom: '1px solid #e2e8f0' }}>Child Full Name</th>
+                            <th style={{ padding: '10px 14px', textAlign: 'left', fontWeight: 700, color: '#475569', borderBottom: '1px solid #e2e8f0', width: '140px' }}>Age</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          {student.dependents.filter((d) => d.name && d.name.trim()).map((dep, idx) => (
+                            <tr key={idx}>
+                              <td style={{ padding: '10px 14px', color: '#0f172a', borderBottom: '1px solid rgba(226, 232, 240, 0.5)' }}>{dep.name}</td>
+                              <td style={{ padding: '10px 14px', color: '#475569', borderBottom: '1px solid rgba(226, 232, 240, 0.5)' }}>{dep.age} years old</td>
+                            </tr>
+                          ))}
+                        </tbody>
+                      </table>
+                    </div>
+                  ) : (
+                    <div style={{ fontSize: '13px', color: '#94a3b8', fontStyle: 'italic' }}>
+                      No dependents registered.
+                    </div>
+                  )}
                 </div>
               </div>
             </div>
@@ -335,16 +360,19 @@ export default function StudentDetail({ student, onEdit, onDelete, onPrint, onBa
                     </tr>
                   </thead>
                   <tbody>
-                    <tr>
-                      <td style={{ padding: '16px 22px', fontWeight: 600, color: '#0f172a', borderBottom: '1px solid rgba(226, 232, 240, 0.5)' }}>Faculty Adviser</td>
-                      <td style={{ padding: '16px 22px', color: '#475569', borderBottom: '1px solid rgba(226, 232, 240, 0.5)' }}>Faculty / Instructor</td>
-                      <td style={{ padding: '16px 22px', color: '#475569', borderBottom: '1px solid rgba(226, 232, 240, 0.5)' }}>09170000000</td>
-                    </tr>
-                    <tr>
-                      <td style={{ padding: '16px 22px', fontWeight: 600, color: '#0f172a' }}>Department Chair</td>
-                      <td style={{ padding: '16px 22px', color: '#475569' }}>College Department</td>
-                      <td style={{ padding: '16px 22px', color: '#475569' }}>09180000000</td>
-                    </tr>
+                    {(student.references && student.references.length > 0
+                      ? student.references
+                      : [
+                          { name: 'Faculty Adviser', affiliation: 'Faculty / Instructor', contact: '09170000000' },
+                          { name: 'Department Chair', affiliation: 'College Department', contact: '09180000000' }
+                        ]
+                    ).map((ref, idx, arr) => (
+                      <tr key={idx}>
+                        <td style={{ padding: '16px 22px', fontWeight: 600, color: '#0f172a', borderBottom: idx < arr.length - 1 ? '1px solid rgba(226, 232, 240, 0.5)' : 'none' }}>{ref.name}</td>
+                        <td style={{ padding: '16px 22px', color: '#475569', borderBottom: idx < arr.length - 1 ? '1px solid rgba(226, 232, 240, 0.5)' : 'none' }}>{ref.affiliation || 'Faculty / Instructor'}</td>
+                        <td style={{ padding: '16px 22px', color: '#475569', borderBottom: idx < arr.length - 1 ? '1px solid rgba(226, 232, 240, 0.5)' : 'none' }}>{ref.contact}</td>
+                      </tr>
+                    ))}
                   </tbody>
                 </table>
               </div>
@@ -387,8 +415,8 @@ export default function StudentDetail({ student, onEdit, onDelete, onPrint, onBa
                 <div style={{ display: 'flex', alignItems: 'center', padding: '14px 0', borderBottom: '1px solid rgba(226, 232, 240, 0.45)' }}>
                   <span style={{ width: '160px', color: '#475569', fontWeight: 600, flexShrink: 0 }}>Must Change PW:</span>
                   <span>
-                    <span style={{ display: 'inline-flex', alignItems: 'center', padding: '4px 14px', borderRadius: '9999px', fontSize: '12px', fontWeight: 700, background: '#dcfce7', color: '#15803d' }}>
-                      {isCompletedPW ? 'No (Completed)' : 'Yes (Required)'}
+                    <span style={{ display: 'inline-flex', alignItems: 'center', padding: '4px 14px', borderRadius: '9999px', fontSize: '12px', fontWeight: 700, background: isPendingPW ? '#fef3c7' : '#dcfce7', color: isPendingPW ? '#d97706' : '#15803d' }}>
+                      {isPendingPW ? 'Yes (Pending)' : 'No (Completed)'}
                     </span>
                   </span>
                 </div>

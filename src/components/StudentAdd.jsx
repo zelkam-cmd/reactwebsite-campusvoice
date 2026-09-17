@@ -84,6 +84,12 @@ export default function StudentAdd({ onSave, onCancel, onNavigateDashboard, exis
       occupation: 'Student',
       employer: '',
       status: 'active',
+      mustChangePassword: true,
+      references: [
+        { name: 'Faculty Adviser', affiliation: 'Faculty / Instructor', contact: '09170000000' },
+        { name: 'Department Chair', affiliation: 'College Department', contact: '09180000000' }
+      ],
+      dependents: [],
       lastUpdated: 'Just now',
       createdAt: 'Today',
       updatedAt: 'Just now'
