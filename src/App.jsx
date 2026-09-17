@@ -9,7 +9,7 @@ import StudentPrint from './components/StudentPrint';
 import { INITIAL_STUDENTS } from './data/initialStudents';
 import './App.css';
 
-const STORAGE_KEY = 'campusvoice_student_records_v6';
+const STORAGE_KEY = 'campusvoice_student_records_v7';
 
 export default function App() {
   // Load students from localStorage or authentic initial records
@@ -250,7 +250,7 @@ export default function App() {
 
           {/* Authentic CampusVoice Footer */}
           <footer className="app-footer">
-            <div className="footer-content" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', width: '100%', padding: '24px 8px 16px 8px' }}>
+            <div className="footer-content">
               <span>© 2026 CampusVoice — Bulacan State University</span>
               <span>
                 v1.0.0 | <a href="mailto:support@campusvoice.edu">support@campusvoice.edu</a>

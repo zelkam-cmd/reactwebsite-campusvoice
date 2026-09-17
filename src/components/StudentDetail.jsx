@@ -1,10 +1,25 @@
 import React from 'react';
 
-export default function StudentDetail({ student, onEdit, onDelete, onPrint, onResetPassword, onBack, onNavigateDashboard }) {
+export default function StudentDetail({
+  student,
+  onEdit,
+  onDelete,
+  onPrint,
+  onResetPassword,
+  onBack,
+  onNavigateDashboard
+}) {
   if (!student) return null;
 
   const initials = student.name
-    ? student.name.split(' ').map((n) => n[0]).join('').slice(0, 2).toUpperCase()
+    ? student.name
+        .trim()
+        .split(' ')
+        .filter(Boolean)
+        .map((n) => n[0])
+        .join('')
+        .slice(0, 2)
+        .toUpperCase()
     : 'ST';
 
   const isPendingPW = !!student.mustChangePassword;
@@ -26,38 +41,29 @@ export default function StudentDetail({ student, onEdit, onDelete, onPrint, onRe
   const ageDisplay = student.age ? `${student.age} yrs old` : '—';
   const bdayAndAge = student.birthdate ? `${formattedBday} (${ageDisplay})` : ageDisplay;
 
+  const defaultReferences = [
+    { name: 'Faculty Adviser', affiliation: 'Faculty / Instructor', contact: '09170000000' },
+    { name: 'Department Chair', affiliation: 'College Department', contact: '09180000000' }
+  ];
+  const referencesList = (student.references && student.references.length > 0) ? student.references : defaultReferences;
+
   return (
     <div className="student-dossier-page">
       {/* Breadcrumbs */}
-      <div className="breadcrumbs" style={{ display: 'flex', alignItems: 'center', gap: '8px', fontSize: '14px', marginBottom: '18px' }}>
+      <div className="breadcrumbs">
         <div className="breadcrumb-item">
-          <span style={{ color: '#0284c7', cursor: 'default', fontWeight: 600 }}>Dashboard</span>
+          <a href="#dashboard" onClick={(e) => e.preventDefault()}>Dashboard</a>
         </div>
-        <span className="breadcrumb-separator" style={{ color: '#94a3b8' }}>▸</span>
+        <span className="breadcrumb-separator">▸</span>
         <div className="breadcrumb-item">
-          <span style={{ color: '#0284c7', cursor: 'pointer', fontWeight: 600 }} onClick={onBack}>Student Registry</span>
+          <a href="#registry" onClick={(e) => { e.preventDefault(); onBack(); }}>Student Registry</a>
         </div>
-        <span className="breadcrumb-separator" style={{ color: '#94a3b8' }}>▸</span>
-        <div className="breadcrumb-item active" style={{ color: '#64748b', fontWeight: 600 }}>
-          {student.name}
-        </div>
+        <span className="breadcrumb-separator">▸</span>
+        <div className="breadcrumb-item active">{student.name}</div>
       </div>
 
-      {/* Hero Header Card with rounded corners and circular pill buttons matching Image 2 */}
-      <div
-        className="card glass-card hero-dossier-card"
-        style={{
-          background: 'rgba(255, 255, 255, 0.68)',
-          backdropFilter: 'blur(24px) saturate(180%)',
-          WebkitBackdropFilter: 'blur(24px) saturate(180%)',
-          borderRadius: '20px',
-          border: '1px solid rgba(255, 255, 255, 0.9)',
-          boxShadow: '0 14px 36px -6px rgba(15, 23, 42, 0.08), 0 4px 12px -2px rgba(15, 23, 42, 0.04)',
-          padding: '26px 28px',
-          marginBottom: '24px',
-          overflow: 'hidden'
-        }}
-      >
+      {/* Header Hero Card */}
+      <div className="card glass-card mb-6" style={{ padding: '24px' }}>
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '20px' }}>
           <div style={{ display: 'flex', alignItems: 'center', gap: '20px' }}>
             <div
@@ -72,76 +78,48 @@ export default function StudentDetail({ student, onEdit, onDelete, onPrint, onRe
                 justifyContent: 'center',
                 fontSize: '28px',
                 fontWeight: 700,
-                color: '#0284c7',
+                color: 'var(--color-primary)',
                 border: '2px solid white',
-                boxShadow: '0 2px 8px rgba(0, 0, 0, 0.06)'
+                boxShadow: 'var(--shadow-sm)'
               }}
             >
-              {initials}
+              {student.avatar ? (
+                <img src={student.avatar} alt="Avatar" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+              ) : (
+                initials
+              )}
             </div>
             <div>
-              <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '6px' }}>
-                <h2 style={{ fontSize: '26px', fontWeight: 800, color: '#0f172a', margin: 0, letterSpacing: '-0.015em' }}>
+              <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '4px' }}>
+                <h2 style={{ fontSize: 'var(--font-size-2xl)', fontWeight: 800, color: 'var(--color-text-primary)', margin: 0 }}>
                   {student.name}
                 </h2>
-                <span
-                  style={{
-                    padding: '4px 12px',
-                    borderRadius: '9999px',
-                    fontSize: '12px',
-                    fontWeight: 700,
-                    background: isActive ? '#dcfce7' : '#fee2e2',
-                    color: isActive ? '#15803d' : '#b91c1c'
-                  }}
-                >
-                  {isActive ? 'Active' : 'Inactive'}
+                <span className={`badge ${isActive ? 'badge-success' : 'badge-gray'}`}>
+                  <span className={`badge-dot ${isActive ? 'active' : 'inactive'}`}></span> {isActive ? 'Active' : 'Inactive'}
                 </span>
               </div>
-              <div style={{ fontSize: '14px', color: '#64748b', display: 'flex', gap: '12px', flexWrap: 'wrap', alignItems: 'center' }}>
-                <span><strong>Student ID:</strong> {student.accountNumber || student.id}</span>
+              <div style={{ fontSize: '13px', color: 'var(--color-text-secondary)', display: 'flex', gap: '12px', flexWrap: 'wrap' }}>
+                <span><strong>Student ID:</strong> {student.accountNumber || student.studentNumber || student.id}</span>
                 <span>•</span>
-                <span>{student.department || 'College of Industrial Technology (CIT)'}</span>
+                <span>{student.department || 'College of Information and Communications Technology (CICT)'}</span>
                 <span>•</span>
-                <span>{student.yearLevel || 'Postgraduate'}</span>
+                <span>{student.yearLevel || 'Student'}</span>
               </div>
             </div>
           </div>
 
-          {/* Action Buttons with fully circular pill shapes matching Image 2 */}
-          <div style={{ display: 'flex', gap: '8px', alignItems: 'center', flexWrap: 'wrap' }}>
+          <div style={{ display: 'flex', gap: '8px', flexWrap: 'wrap' }}>
             <button
               type="button"
-              className="btn btn-primary"
+              className="btn btn-primary btn-sm"
               onClick={() => onEdit(student)}
-              style={{
-                background: 'linear-gradient(135deg, #0284c7 0%, #2563eb 100%)',
-                color: '#ffffff',
-                border: 'none',
-                padding: '9px 24px',
-                borderRadius: '9999px',
-                fontWeight: 700,
-                fontSize: '14px',
-                cursor: 'pointer',
-                boxShadow: '0 4px 14px rgba(2, 132, 199, 0.35)'
-              }}
             >
               Edit Record
             </button>
             <button
               type="button"
-              className="btn btn-secondary"
+              className="btn btn-secondary btn-sm"
               onClick={() => onPrint ? onPrint(student) : window.print()}
-              style={{
-                background: 'rgba(255, 255, 255, 0.85)',
-                color: '#0f172a',
-                border: '1px solid #cbd5e1',
-                padding: '9px 20px',
-                borderRadius: '9999px',
-                fontWeight: 600,
-                fontSize: '14px',
-                cursor: 'pointer',
-                boxShadow: '0 2px 6px rgba(0, 0, 0, 0.04)'
-              }}
             >
               Print SIS
             </button>
@@ -152,21 +130,8 @@ export default function StudentDetail({ student, onEdit, onDelete, onPrint, onRe
                 if (onResetPassword) {
                   onResetPassword(student);
                 } else {
-                  const confirmed = window.confirm('Reset password to Student ID?');
-                  if (confirmed) {
-                    alert(`Password has been reset to Student ID (${student.accountNumber || student.studentNumber || student.id}).`);
-                  }
+                  window.confirm(`Reset password for ${student.name} to Student ID?`);
                 }
-              }}
-              style={{
-                background: '#fef3c7',
-                color: '#d97706',
-                border: '1px solid #fde68a',
-                borderRadius: '9999px',
-                padding: '9px 18px',
-                fontWeight: 600,
-                fontSize: '14px',
-                cursor: 'pointer'
               }}
             >
               Reset Password
@@ -175,16 +140,6 @@ export default function StudentDetail({ student, onEdit, onDelete, onPrint, onRe
               type="button"
               className="btn btn-ghost btn-sm text-error"
               onClick={() => onDelete(student)}
-              style={{
-                background: 'transparent',
-                color: '#ef4444',
-                border: 'none',
-                borderRadius: '9999px',
-                padding: '9px 14px',
-                fontWeight: 600,
-                fontSize: '14px',
-                cursor: 'pointer'
-              }}
             >
               Delete Record
             </button>
@@ -192,300 +147,247 @@ export default function StudentDetail({ student, onEdit, onDelete, onPrint, onRe
         </div>
       </div>
 
-      {/* Two Column Grid */}
-      <div style={{ display: 'grid', gridTemplateColumns: 'minmax(0, 1.85fr) minmax(0, 1fr)', gap: '24px', alignItems: 'start' }}>
+      <div className="dashboard-grid">
         {/* Left Column: Personal, Family & References */}
         <div style={{ display: 'flex', flexDirection: 'column', gap: '24px' }}>
-          {/* I. Personal & Demographic Details Card */}
-          <div
-            className="card glass-card"
-            style={{
-              background: 'rgba(255, 255, 255, 0.62)',
-              backdropFilter: 'blur(24px) saturate(180%)',
-              WebkitBackdropFilter: 'blur(24px) saturate(180%)',
-              borderRadius: '20px',
-              border: '1px solid rgba(255, 255, 255, 0.9)',
-              boxShadow: '0 14px 36px -6px rgba(15, 23, 42, 0.08), 0 4px 12px -2px rgba(15, 23, 42, 0.04)',
-              overflow: 'hidden'
-            }}
-          >
-            <div style={{ padding: '24px 26px 16px' }}>
-              <h3 style={{ fontSize: '18px', fontWeight: 800, color: '#0f172a', margin: 0, letterSpacing: '-0.01em' }}>
-                I. Personal & Demographic Details
-              </h3>
-            </div>
 
+          {/* I. Personal & Demographic Details */}
+          <div className="card glass-card">
+            <div className="card-header">
+              <h3 className="card-title">I. Personal & Demographic Details</h3>
+            </div>
             <div className="card-body" style={{ padding: 0 }}>
-              <div style={{ overflowX: 'auto' }}>
-                <table style={{ width: '100%', borderCollapse: 'separate', borderSpacing: 0, fontSize: '14px' }}>
+              <div className="data-table-responsive">
+                <table className="data-table">
                   <tbody>
                     <tr>
-                      <td style={{ width: '25%', padding: '16px 22px', fontWeight: 600, background: '#ffffff', color: '#475569', borderBottom: '1px solid rgba(226, 232, 240, 0.5)' }}>First Name:</td>
-                      <td style={{ width: '25%', padding: '16px 22px', background: 'transparent', color: '#0f172a', borderBottom: '1px solid rgba(226, 232, 240, 0.5)' }}>{student.firstName || student.name?.split(' ')[0] || '—'}</td>
-                      <td style={{ width: '25%', padding: '16px 22px', fontWeight: 600, background: '#ffffff', color: '#475569', borderBottom: '1px solid rgba(226, 232, 240, 0.5)' }}>Middle Name:</td>
-                      <td style={{ width: '25%', padding: '16px 22px', background: 'transparent', color: '#0f172a', borderBottom: '1px solid rgba(226, 232, 240, 0.5)' }}>{student.middleName || '—'}</td>
+                      <td style={{ width: '25%', fontWeight: 600, background: '#f8fafc' }}>First Name:</td>
+                      <td style={{ width: '25%' }}>{student.firstName || student.name?.split(' ')[0] || '—'}</td>
+                      <td style={{ width: '25%', fontWeight: 600, background: '#f8fafc' }}>Middle Name:</td>
+                      <td style={{ width: '25%' }}>{student.middleName || '—'}</td>
                     </tr>
                     <tr>
-                      <td style={{ padding: '16px 22px', fontWeight: 600, background: '#ffffff', color: '#475569', borderBottom: '1px solid rgba(226, 232, 240, 0.5)' }}>Last Name:</td>
-                      <td style={{ padding: '16px 22px', background: 'transparent', color: '#0f172a', borderBottom: '1px solid rgba(226, 232, 240, 0.5)' }}>{student.lastName || student.name?.split(' ').slice(-1)[0] || '—'}</td>
-                      <td style={{ padding: '16px 22px', fontWeight: 600, background: '#ffffff', color: '#475569', borderBottom: '1px solid rgba(226, 232, 240, 0.5)' }}>Extension (Suffix):</td>
-                      <td style={{ padding: '16px 22px', background: 'transparent', color: '#0f172a', borderBottom: '1px solid rgba(226, 232, 240, 0.5)' }}>{student.extensionName || '—'}</td>
+                      <td style={{ fontWeight: 600, background: '#f8fafc' }}>Last Name:</td>
+                      <td>{student.lastName || student.name?.split(' ').slice(-1)[0] || '—'}</td>
+                      <td style={{ fontWeight: 600, background: '#f8fafc' }}>Extension (Suffix):</td>
+                      <td>{student.extensionName || '—'}</td>
                     </tr>
                     <tr>
-                      <td style={{ padding: '16px 22px', fontWeight: 600, background: '#ffffff', color: '#475569', borderBottom: '1px solid rgba(226, 232, 240, 0.5)' }}>Civil Status:</td>
-                      <td style={{ padding: '16px 22px', background: 'transparent', color: '#0f172a', borderBottom: '1px solid rgba(226, 232, 240, 0.5)' }}>{student.civilStatus || 'Single'}</td>
-                      <td style={{ padding: '16px 22px', fontWeight: 600, background: '#ffffff', color: '#475569', borderBottom: '1px solid rgba(226, 232, 240, 0.5)' }}>Birthdate & Age:</td>
-                      <td style={{ padding: '16px 22px', background: 'transparent', color: '#0f172a', borderBottom: '1px solid rgba(226, 232, 240, 0.5)' }}>{bdayAndAge}</td>
+                      <td style={{ fontWeight: 600, background: '#f8fafc' }}>Civil Status:</td>
+                      <td>{student.civilStatus || 'Single'}</td>
+                      <td style={{ fontWeight: 600, background: '#f8fafc' }}>Birthdate & Age:</td>
+                      <td>{bdayAndAge}</td>
                     </tr>
                     <tr>
-                      <td style={{ padding: '16px 22px', fontWeight: 600, background: '#ffffff', color: '#475569', borderBottom: '1px solid rgba(226, 232, 240, 0.5)' }}>Permanent Address:</td>
-                      <td colSpan={3} style={{ padding: '16px 22px', background: 'transparent', color: '#0f172a', borderBottom: '1px solid rgba(226, 232, 240, 0.5)' }}>{student.address || '—'}</td>
+                      <td style={{ fontWeight: 600, background: '#f8fafc' }}>Permanent Address:</td>
+                      <td colSpan={3}>{student.address || '—'}</td>
                     </tr>
                     <tr>
-                      <td style={{ padding: '16px 22px', fontWeight: 600, background: '#ffffff', color: '#475569', borderBottom: '1px solid rgba(226, 232, 240, 0.5)' }}>Mobile Number:</td>
-                      <td style={{ padding: '16px 22px', background: 'transparent', color: '#0f172a', borderBottom: '1px solid rgba(226, 232, 240, 0.5)' }}>{student.contact || '—'}</td>
-                      <td style={{ padding: '16px 22px', fontWeight: 600, background: '#ffffff', color: '#475569', borderBottom: '1px solid rgba(226, 232, 240, 0.5)' }}>Email Address:</td>
-                      <td style={{ padding: '16px 22px', background: 'transparent', color: '#0f172a', borderBottom: '1px solid rgba(226, 232, 240, 0.5)' }}>{student.email || '—'}</td>
+                      <td style={{ fontWeight: 600, background: '#f8fafc' }}>Mobile Number:</td>
+                      <td>{student.contact || student.contactNumber || '—'}</td>
+                      <td style={{ fontWeight: 600, background: '#f8fafc' }}>Email Address:</td>
+                      <td>{student.email || '—'}</td>
                     </tr>
                     <tr>
-                      <td style={{ padding: '16px 22px', fontWeight: 600, background: '#ffffff', color: '#475569' }}>Occupation:</td>
-                      <td style={{ padding: '16px 22px', background: 'transparent', color: '#0f172a' }}>{student.occupation || 'Student'}</td>
-                      <td style={{ padding: '16px 22px', fontWeight: 600, background: '#ffffff', color: '#475569' }}>Employer:</td>
-                      <td style={{ padding: '16px 22px', background: 'transparent', color: '#0f172a' }}>{student.employer || '—'}</td>
+                      <td style={{ fontWeight: 600, background: '#f8fafc' }}>Occupation:</td>
+                      <td>{student.occupation || 'Student'}</td>
+                      <td style={{ fontWeight: 600, background: '#f8fafc' }}>Employer:</td>
+                      <td>{student.employer || '—'}</td>
                     </tr>
+                    {student.employerAddress && (
+                      <tr>
+                        <td style={{ fontWeight: 600, background: '#f8fafc' }}>Employer Address:</td>
+                        <td colSpan={3}>{student.employerAddress}</td>
+                      </tr>
+                    )}
                   </tbody>
                 </table>
               </div>
             </div>
           </div>
 
-          {/* II. Family Background & Dependents Card */}
-          <div
-            className="card glass-card"
-            style={{
-              background: 'rgba(255, 255, 255, 0.62)',
-              backdropFilter: 'blur(24px) saturate(180%)',
-              WebkitBackdropFilter: 'blur(24px) saturate(180%)',
-              borderRadius: '20px',
-              border: '1px solid rgba(255, 255, 255, 0.9)',
-              boxShadow: '0 14px 36px -6px rgba(15, 23, 42, 0.08), 0 4px 12px -2px rgba(15, 23, 42, 0.04)',
-              overflow: 'hidden'
-            }}
-          >
-            <div style={{ padding: '24px 26px 16px' }}>
-              <h3 style={{ fontSize: '18px', fontWeight: 800, color: '#0f172a', margin: 0, letterSpacing: '-0.01em' }}>
-                II. Family Background & Dependents
-              </h3>
+          {/* II. Family Background & Dependents */}
+          <div className="card glass-card">
+            <div className="card-header">
+              <h3 className="card-title">‍‍II. Family Background & Dependents</h3>
             </div>
-
-            <div className="card-body" style={{ padding: 0 }}>
-              <div style={{ overflowX: 'auto' }}>
-                <table style={{ width: '100%', borderCollapse: 'separate', borderSpacing: 0, fontSize: '14px' }}>
+            <div className="card-body">
+              <div className="data-table-responsive" style={{ marginBottom: '16px' }}>
+                <table className="data-table">
                   <tbody>
                     <tr>
-                      <td style={{ width: '25%', padding: '16px 22px', fontWeight: 600, background: '#ffffff', color: '#475569', borderBottom: '1px solid rgba(226, 232, 240, 0.5)' }}>Father's Name:</td>
-                      <td style={{ width: '25%', padding: '16px 22px', background: 'transparent', color: '#0f172a', borderBottom: '1px solid rgba(226, 232, 240, 0.5)' }}>{student.fatherName || '—'}</td>
-                      <td style={{ width: '25%', padding: '16px 22px', fontWeight: 600, background: '#ffffff', color: '#475569', borderBottom: '1px solid rgba(226, 232, 240, 0.5)' }}>Mother's Maiden Name:</td>
-                      <td style={{ width: '25%', padding: '16px 22px', background: 'transparent', color: '#0f172a', borderBottom: '1px solid rgba(226, 232, 240, 0.5)' }}>{student.motherName || '—'}</td>
+                      <td style={{ width: '25%', fontWeight: 600, background: '#f8fafc' }}>Father's Name:</td>
+                      <td style={{ width: '25%' }}>{student.fatherName || '—'}</td>
+                      <td style={{ width: '25%', fontWeight: 600, background: '#f8fafc' }}>Mother's Maiden Name:</td>
+                      <td style={{ width: '25%' }}>{student.motherName || '—'}</td>
                     </tr>
                     <tr>
-                      <td style={{ padding: '16px 22px', fontWeight: 600, background: '#ffffff', color: '#475569' }}>Spouse Name:</td>
-                      <td style={{ padding: '16px 22px', background: 'transparent', color: '#0f172a' }}>{student.spouseName || '—'}</td>
-                      <td style={{ padding: '16px 22px', fontWeight: 600, background: '#ffffff', color: '#475569' }}>Spouse Occupation:</td>
-                      <td style={{ padding: '16px 22px', background: 'transparent', color: '#0f172a' }}>{student.spouseOccupation || '—'}</td>
+                      <td style={{ fontWeight: 600, background: '#f8fafc' }}>Spouse Name:</td>
+                      <td>{student.spouseName || '—'}</td>
+                      <td style={{ fontWeight: 600, background: '#f8fafc' }}>Spouse Occupation:</td>
+                      <td>{student.spouseOccupation || '—'}</td>
                     </tr>
+                    {student.spouseEmployer && (
+                      <tr>
+                        <td style={{ fontWeight: 600, background: '#f8fafc' }}>Spouse Employer:</td>
+                        <td colSpan={3}>{student.spouseEmployer}</td>
+                      </tr>
+                    )}
                   </tbody>
                 </table>
+              </div>
 
-                <div style={{ padding: '20px 26px', borderTop: '1px solid rgba(226, 232, 240, 0.5)' }}>
-                  <div style={{ fontSize: '14px', fontWeight: 700, color: '#334155', marginBottom: '8px' }}>
-                    Registered Children / Dependents:
-                  </div>
-                  {student.dependents && student.dependents.filter((d) => d.name && d.name.trim()).length > 0 ? (
-                    <div style={{ overflowX: 'auto' }}>
-                      <table style={{ width: '100%', borderCollapse: 'separate', borderSpacing: 0, fontSize: '13px' }}>
-                        <thead>
-                          <tr style={{ background: '#f8fafc' }}>
-                            <th style={{ padding: '10px 14px', textAlign: 'left', fontWeight: 700, color: '#475569', borderBottom: '1px solid #e2e8f0' }}>Child Full Name</th>
-                            <th style={{ padding: '10px 14px', textAlign: 'left', fontWeight: 700, color: '#475569', borderBottom: '1px solid #e2e8f0', width: '140px' }}>Age</th>
-                          </tr>
-                        </thead>
-                        <tbody>
-                          {student.dependents.filter((d) => d.name && d.name.trim()).map((dep, idx) => (
-                            <tr key={idx}>
-                              <td style={{ padding: '10px 14px', color: '#0f172a', borderBottom: '1px solid rgba(226, 232, 240, 0.5)' }}>{dep.name}</td>
-                              <td style={{ padding: '10px 14px', color: '#475569', borderBottom: '1px solid rgba(226, 232, 240, 0.5)' }}>{dep.age} years old</td>
-                            </tr>
-                          ))}
-                        </tbody>
-                      </table>
-                    </div>
+              <div style={{ fontWeight: 700, fontSize: '13px', color: 'var(--color-text-secondary)', marginBottom: '8px' }}>
+                Registered Children / Dependents:
+              </div>
+              {(!student.dependents || student.dependents.length === 0) ? (
+                <div style={{ fontSize: '12px', color: '#94a3b8', fontStyle: 'italic' }}>No dependents registered.</div>
+              ) : (
+                <div className="data-table-responsive">
+                  <table className="data-table">
+                    <thead>
+                      <tr>
+                        <th>Child Full Name</th>
+                        <th style={{ width: '140px' }}>Age</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {student.dependents.map((dep, idx) => (
+                        <tr key={idx}>
+                          <td>{dep.name || dep.child_name}</td>
+                          <td>{dep.age || dep.child_age} years old</td>
+                        </tr>
+                      ))}
+                    </tbody>
+                  </table>
+                </div>
+              )}
+            </div>
+          </div>
+
+          {/* III. Character / Faculty References */}
+          <div className="card glass-card">
+            <div className="card-header">
+              <h3 className="card-title">III. Character / Faculty References</h3>
+            </div>
+            <div className="card-body" style={{ padding: 0 }}>
+              {referencesList.length === 0 ? (
+                <div style={{ padding: '16px', fontSize: '12px', color: '#94a3b8', fontStyle: 'italic' }}>No references listed.</div>
+              ) : (
+                <div className="data-table-responsive">
+                  <table className="data-table">
+                    <thead>
+                      <tr>
+                        <th>Reference Name</th>
+                        <th>Relationship / Affiliation</th>
+                        <th>Contact Number</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {referencesList.map((ref, idx) => (
+                        <tr key={idx}>
+                          <td className="font-semibold">{ref.name || ref.reference_name}</td>
+                          <td>{ref.affiliation || ref.relationship_or_affiliation || 'Faculty / Member'}</td>
+                          <td>{ref.contact || ref.contact_number}</td>
+                        </tr>
+                      ))}
+                    </tbody>
+                  </table>
+                </div>
+              )}
+            </div>
+          </div>
+
+        </div>
+
+        {/* Right Column: Account Status & Survey Submissions */}
+        <div style={{ display: 'flex', flexDirection: 'column', gap: '24px' }}>
+
+          {/* Account Status Card */}
+          <div className="card glass-card">
+            <div className="card-header">
+              <h3 className="card-title">Account Status</h3>
+            </div>
+            <div className="card-body">
+              <div className="profile-detail-row">
+                <div className="profile-detail-label">Status:</div>
+                <div className="profile-detail-value">
+                  <span className={`badge ${isActive ? 'badge-success' : 'badge-gray'}`}>
+                    <span className={`badge-dot ${isActive ? 'active' : 'inactive'}`}></span> {isActive ? 'Active' : 'Inactive'}
+                  </span>
+                </div>
+              </div>
+              <div className="profile-detail-row">
+                <div className="profile-detail-label">Must Change PW:</div>
+                <div className="profile-detail-value">
+                  {isPendingPW ? (
+                    <span className="badge badge-warning">Yes (Pending)</span>
                   ) : (
-                    <div style={{ fontSize: '13px', color: '#94a3b8', fontStyle: 'italic' }}>
-                      No dependents registered.
-                    </div>
+                    <span className="badge badge-success">No (Completed)</span>
                   )}
                 </div>
               </div>
+              <div className="profile-detail-row">
+                <div className="profile-detail-label">Failed Attempts:</div>
+                <div className="profile-detail-value">{student.failedAttempts || 0}</div>
+              </div>
+              <div className="profile-detail-row">
+                <div className="profile-detail-label">Account Created:</div>
+                <div className="profile-detail-value">{student.createdAt || 'Aug 24, 2026'}</div>
+              </div>
+              <div className="profile-detail-row">
+                <div className="profile-detail-label">Last Profile Update:</div>
+                <div className="profile-detail-value">{student.updatedAt || 'Aug 24, 2026 11:06 AM'}</div>
+              </div>
+
+              {student.signature && (
+                <div style={{ marginTop: '16px', paddingTop: '14px', borderTop: '1px solid #e2e8f0', textAlign: 'center' }}>
+                  <div style={{ fontSize: '11px', fontWeight: 700, color: '#64748b', marginBottom: '6px' }}>DIGITAL SIGNATURE ON FILE</div>
+                  <img src={student.signature} alt="Signature" style={{ maxHeight: '50px', maxWidth: '100%' }} />
+                </div>
+              )}
             </div>
           </div>
 
-          {/* III. Character / Faculty References Card */}
-          <div
-            className="card glass-card"
-            style={{
-              background: 'rgba(255, 255, 255, 0.62)',
-              backdropFilter: 'blur(24px) saturate(180%)',
-              WebkitBackdropFilter: 'blur(24px) saturate(180%)',
-              borderRadius: '20px',
-              border: '1px solid rgba(255, 255, 255, 0.9)',
-              boxShadow: '0 14px 36px -6px rgba(15, 23, 42, 0.08), 0 4px 12px -2px rgba(15, 23, 42, 0.04)',
-              overflow: 'hidden'
-            }}
-          >
-            <div style={{ padding: '24px 26px 16px' }}>
-              <h3 style={{ fontSize: '18px', fontWeight: 800, color: '#0f172a', margin: 0, letterSpacing: '-0.01em' }}>
-                III. Character / Faculty References
-              </h3>
+          {/* Survey Submission History */}
+          <div className="card glass-card">
+            <div className="card-header">
+              <h3 className="card-title">Survey Activity History</h3>
             </div>
-
             <div className="card-body" style={{ padding: 0 }}>
-              <div style={{ overflowX: 'auto' }}>
-                <table style={{ width: '100%', borderCollapse: 'separate', borderSpacing: 0, fontSize: '14px' }}>
-                  <thead>
-                    <tr>
-                      <th style={{ padding: '14px 22px', textAlign: 'left', fontSize: '12px', fontWeight: 800, color: '#475569', background: 'rgba(241, 245, 249, 0.8)', textTransform: 'uppercase', letterSpacing: '0.06em', borderBottom: '1px solid #e2e8f0' }}>REFERENCE NAME</th>
-                      <th style={{ padding: '14px 22px', textAlign: 'left', fontSize: '12px', fontWeight: 800, color: '#475569', background: 'rgba(241, 245, 249, 0.8)', textTransform: 'uppercase', letterSpacing: '0.06em', borderBottom: '1px solid #e2e8f0' }}>RELATIONSHIP / AFFILIATION</th>
-                      <th style={{ padding: '14px 22px', textAlign: 'left', fontSize: '12px', fontWeight: 800, color: '#475569', background: 'rgba(241, 245, 249, 0.8)', textTransform: 'uppercase', letterSpacing: '0.06em', borderBottom: '1px solid #e2e8f0' }}>CONTACT NUMBER</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    {(student.references && student.references.length > 0
-                      ? student.references
-                      : [
-                          { name: 'Faculty Adviser', affiliation: 'Faculty / Instructor', contact: '09170000000' },
-                          { name: 'Department Chair', affiliation: 'College Department', contact: '09180000000' }
-                        ]
-                    ).map((ref, idx, arr) => (
-                      <tr key={idx}>
-                        <td style={{ padding: '16px 22px', fontWeight: 600, color: '#0f172a', borderBottom: idx < arr.length - 1 ? '1px solid rgba(226, 232, 240, 0.5)' : 'none' }}>{ref.name}</td>
-                        <td style={{ padding: '16px 22px', color: '#475569', borderBottom: idx < arr.length - 1 ? '1px solid rgba(226, 232, 240, 0.5)' : 'none' }}>{ref.affiliation || 'Faculty / Instructor'}</td>
-                        <td style={{ padding: '16px 22px', color: '#475569', borderBottom: idx < arr.length - 1 ? '1px solid rgba(226, 232, 240, 0.5)' : 'none' }}>{ref.contact}</td>
+              {(!student.history || student.history.length === 0) ? (
+                <div style={{ padding: '24px', textAlign: 'center', color: '#64748b', fontSize: '13px' }}>
+                  No survey responses recorded yet.
+                </div>
+              ) : (
+                <div className="data-table-responsive">
+                  <table className="data-table">
+                    <thead>
+                      <tr>
+                        <th>Survey Title</th>
+                        <th>Answered</th>
+                        <th>Submitted</th>
                       </tr>
-                    ))}
-                  </tbody>
-                </table>
-              </div>
+                    </thead>
+                    <tbody>
+                      {student.history.map((hist, idx) => (
+                        <tr key={idx}>
+                          <td>
+                            <div className="font-semibold">{hist.surveyTitle}</div>
+                            <div style={{ fontSize: '11px', color: 'var(--color-text-tertiary)' }}>{hist.category}</div>
+                          </td>
+                          <td>{hist.answeredQuestions} items</td>
+                          <td style={{ fontSize: '12px' }}>{hist.submittedAt}</td>
+                        </tr>
+                      ))}
+                    </tbody>
+                  </table>
+                </div>
+              )}
             </div>
           </div>
+
         </div>
-
-        {/* Right Column: Account Status & Survey Activity History */}
-        <div style={{ display: 'flex', flexDirection: 'column', gap: '24px' }}>
-          {/* Account Status Card matching Image 3 and crop_account_status.png */}
-          <div
-            className="card glass-card"
-            style={{
-              background: 'rgba(255, 255, 255, 0.62)',
-              backdropFilter: 'blur(24px) saturate(180%)',
-              WebkitBackdropFilter: 'blur(24px) saturate(180%)',
-              borderRadius: '20px',
-              border: '1px solid rgba(255, 255, 255, 0.9)',
-              boxShadow: '0 14px 36px -6px rgba(15, 23, 42, 0.08), 0 4px 12px -2px rgba(15, 23, 42, 0.04)',
-              overflow: 'hidden'
-            }}
-          >
-            <div style={{ padding: '24px 26px 16px' }}>
-              <h3 style={{ fontSize: '18px', fontWeight: 800, color: '#0f172a', margin: 0, letterSpacing: '-0.01em' }}>
-                Account Status
-              </h3>
-            </div>
-
-            <div className="card-body" style={{ padding: '0 26px 22px 26px' }}>
-              <div style={{ display: 'flex', flexDirection: 'column', fontSize: '14px' }}>
-                <div style={{ display: 'flex', alignItems: 'center', padding: '14px 0', borderBottom: '1px solid rgba(226, 232, 240, 0.45)' }}>
-                  <span style={{ width: '160px', color: '#475569', fontWeight: 600, flexShrink: 0 }}>Status:</span>
-                  <span>
-                    <span style={{ display: 'inline-flex', alignItems: 'center', padding: '4px 14px', borderRadius: '9999px', fontSize: '12px', fontWeight: 700, background: '#dcfce7', color: '#15803d' }}>
-                      {isActive ? 'Active' : 'Inactive'}
-                    </span>
-                  </span>
-                </div>
-
-                <div style={{ display: 'flex', alignItems: 'center', padding: '14px 0', borderBottom: '1px solid rgba(226, 232, 240, 0.45)' }}>
-                  <span style={{ width: '160px', color: '#475569', fontWeight: 600, flexShrink: 0 }}>Must Change PW:</span>
-                  <span>
-                    <span style={{ display: 'inline-flex', alignItems: 'center', padding: '4px 14px', borderRadius: '9999px', fontSize: '12px', fontWeight: 700, background: isPendingPW ? '#fef3c7' : '#dcfce7', color: isPendingPW ? '#d97706' : '#15803d' }}>
-                      {isPendingPW ? 'Yes (Pending)' : 'No (Completed)'}
-                    </span>
-                  </span>
-                </div>
-
-                <div style={{ display: 'flex', alignItems: 'center', padding: '14px 0', borderBottom: '1px solid rgba(226, 232, 240, 0.45)' }}>
-                  <span style={{ width: '160px', color: '#475569', fontWeight: 600, flexShrink: 0 }}>Failed Attempts:</span>
-                  <span style={{ fontWeight: 600, color: '#0f172a' }}>0</span>
-                </div>
-
-                <div style={{ display: 'flex', alignItems: 'center', padding: '14px 0', borderBottom: '1px solid rgba(226, 232, 240, 0.45)' }}>
-                  <span style={{ width: '160px', color: '#475569', fontWeight: 600, flexShrink: 0 }}>Account Created:</span>
-                  <span style={{ fontWeight: 600, color: '#0f172a' }}>{student.createdAt || 'Aug 24, 2026'}</span>
-                </div>
-
-                <div style={{ display: 'flex', alignItems: 'center', padding: '14px 0' }}>
-                  <span style={{ width: '160px', color: '#475569', fontWeight: 600, flexShrink: 0 }}>Last Profile Update:</span>
-                  <span style={{ fontWeight: 600, color: '#0f172a' }}>{student.updatedAt || 'Aug 24, 2026 11:06 AM'}</span>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          {/* Survey Activity History Card */}
-          <div
-            className="card glass-card"
-            style={{
-              background: 'rgba(255, 255, 255, 0.62)',
-              backdropFilter: 'blur(24px) saturate(180%)',
-              WebkitBackdropFilter: 'blur(24px) saturate(180%)',
-              borderRadius: '20px',
-              border: '1px solid rgba(255, 255, 255, 0.9)',
-              boxShadow: '0 14px 36px -6px rgba(15, 23, 42, 0.08), 0 4px 12px -2px rgba(15, 23, 42, 0.04)',
-              overflow: 'hidden'
-            }}
-          >
-            <div style={{ padding: '24px 26px 16px' }}>
-              <h3 style={{ fontSize: '18px', fontWeight: 800, color: '#0f172a', margin: 0, letterSpacing: '-0.01em' }}>
-                Survey Activity History
-              </h3>
-            </div>
-
-            <div className="card-body" style={{ textAlign: 'center', padding: '44px 20px 54px' }}>
-              <div style={{ fontWeight: 800, color: '#0f172a', fontSize: '16px' }}>No submissions</div>
-              <p style={{ color: '#64748b', fontSize: '14px', margin: '6px 0 0 0' }}>No survey responses submitted yet.</p>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      {/* Back Button */}
-      <div style={{ marginTop: '24px' }}>
-        <button
-          type="button"
-          className="btn btn-secondary"
-          onClick={onBack}
-          style={{
-            background: '#ffffff',
-            color: '#0f172a',
-            border: '1px solid #cbd5e1',
-            padding: '9px 22px',
-            borderRadius: '9999px',
-            fontWeight: 600,
-            fontSize: '13px',
-            cursor: 'pointer',
-            boxShadow: '0 2px 6px rgba(0,0,0,0.03)'
-          }}
-        >
-          ← Back to Registry
-        </button>
       </div>
     </div>
   );

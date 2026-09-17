@@ -1,0 +1,139 @@
+/* ============================================================
+   CampusVoice — Unified Global Glassmorphism Design Tokens
+   Mint Green → Soft Lavender → Light Blue Gradient Theme
+   ============================================================ */
+
+:root {
+    /* ── Primary Colors ──────────────────────────── */
+    --color-primary: #0284C7;
+    --color-primary-hover: #0369A1;
+    --color-primary-active: #075985;
+    --color-primary-light: #E0F2FE;
+    --color-primary-lighter: #F0F9FF;
+    --color-primary-50: #F0F9FF;
+    --color-primary-100: #E0F2FE;
+    --color-primary-500: #0284C7;
+    --color-primary-600: #0369A1;
+    --color-primary-700: #075985;
+
+    /* ── Secondary (Soft Cyan) ────────────────────── */
+    --color-secondary: #06B6D4;
+    --color-secondary-hover: #0891B2;
+    --color-secondary-light: #CFFAFE;
+    --color-secondary-lighter: #ECFEFF;
+
+    /* ── Accent (Purple) ─────────────────────────── */
+    --color-accent: #8B5CF6;
+    --color-accent-hover: #7C3AED;
+    --color-accent-light: #EDE9FE;
+    --color-accent-lighter: #F5F3FF;
+
+    /* ── Neutral / Gray Scale ────────────────────── */
+    --color-gray-50: #F8FAFC;
+    --color-gray-100: #F1F5F9;
+    --color-gray-200: #E2E8F0;
+    --color-gray-300: #CBD5E1;
+    --color-gray-400: #94A3B8;
+    --color-gray-500: #64748B;
+    --color-gray-600: #475569;
+    --color-gray-700: #334155;
+    --color-gray-800: #1E293B;
+    --color-gray-900: #0F172A;
+
+    /* ── Semantic Colors ─────────────────────────── */
+    --color-success: #10B981;
+    --color-success-light: #D1FAE5;
+    --color-success-dark: #059669;
+    --color-warning: #F59E0B;
+    --color-warning-light: #FEF3C7;
+    --color-warning-dark: #D97706;
+    --color-error: #EF4444;
+    --color-error-light: #FEE2E2;
+    --color-error-dark: #DC2626;
+
+    /* ── GLOBAL GRADIENT BACKGROUND (Sky Blue → Slate → Lavender → Indigo) ── */
+    --color-page-bg: linear-gradient(135deg, #E0F2FE 0%, #F1F5F9 35%, #EDE9FE 70%, #E0E7FF 100%);
+
+    /* ── GLOBAL GLASS TOKENS (Standardized Site-Wide) ── */
+    --color-glass-surface: rgba(255, 255, 255, 0.72);
+    --color-glass-surface-hover: rgba(255, 255, 255, 0.85);
+    --color-glass-nav: rgba(255, 255, 255, 0.72);
+    --color-glass-input: rgba(255, 255, 255, 0.55);
+    --glass-blur: blur(20px) saturate(180%);
+    --glass-border: 1px solid rgba(255, 255, 255, 0.85);
+    --glass-border-subtle: 1px solid rgba(226, 232, 240, 0.7);
+    --glass-shadow: 0 10px 30px -5px rgba(15, 23, 42, 0.05), 0 4px 12px -2px rgba(15, 23, 42, 0.03);
+
+    --color-text: #0F172A;
+    --color-text-secondary: #475569;
+    --color-text-tertiary: #64748B;
+    --color-text-inverse: #FFFFFF;
+    --color-text-link: #0284C7;
+
+    /* ── Typography ──────────────────────────────── */
+    --font-family: 'Plus Jakarta Sans', 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    --font-mono: 'JetBrains Mono', monospace;
+
+    --font-size-xs: 0.75rem;     /* 12px */
+    --font-size-sm: 0.8125rem;   /* 13px */
+    --font-size-base: 0.875rem;  /* 14px */
+    --font-size-md: 1rem;        /* 16px */
+    --font-size-lg: 1.125rem;    /* 18px */
+    --font-size-xl: 1.25rem;     /* 20px */
+    --font-size-2xl: 1.5rem;     /* 24px */
+    --font-size-3xl: 1.875rem;   /* 30px */
+    --font-size-4xl: 2.25rem;    /* 36px */
+
+    --font-weight-normal: 400;
+    --font-weight-medium: 500;
+    --font-weight-semibold: 600;
+    --font-weight-bold: 700;
+    --font-weight-extrabold: 800;
+
+    --line-height-tight: 1.25;
+    --line-height-normal: 1.5;
+    --line-height-relaxed: 1.75;
+
+    /* ── Spacing Tokens ──────────────────────────── */
+    --space-0: 0;
+    --space-1: 0.25rem;   /* 4px */
+    --space-2: 0.5rem;    /* 8px */
+    --space-3: 0.75rem;   /* 12px */
+    --space-4: 1rem;      /* 16px */
+    --space-5: 1.25rem;   /* 20px */
+    --space-6: 1.5rem;    /* 24px */
+    --space-8: 2rem;      /* 32px */
+    --space-10: 2.5rem;   /* 40px */
+    --space-12: 3rem;     /* 48px */
+
+    /* ── Border Radius Tokens ────────────────────── */
+    --radius-sm: 8px;
+    --radius-md: 12px;
+    --radius-lg: 16px;
+    --radius-xl: 20px;
+    --radius-2xl: 24px;
+    --radius-pill: 9999px;
+    --radius-full: 9999px;
+
+    /* ── Soft Shadows (No hard outlines) ─────────── */
+    --shadow-glass: 0 8px 32px rgba(0, 0, 0, 0.08);
+    --shadow-glass-hover: 0 12px 40px rgba(0, 0, 0, 0.12);
+    --shadow-button: 0 4px 16px rgba(2, 132, 199, 0.30);
+    --shadow-button-hover: 0 8px 24px rgba(2, 132, 199, 0.40);
+    --shadow-xs: 0 2px 8px rgba(0, 0, 0, 0.04);
+    --shadow-sm: 0 4px 16px rgba(0, 0, 0, 0.06);
+    --shadow-md: 0 8px 32px rgba(0, 0, 0, 0.08);
+    --shadow-lg: 0 12px 40px rgba(0, 0, 0, 0.12);
+    --shadow-xl: 0 20px 50px rgba(0, 0, 0, 0.16);
+
+    /* ── Transitions ─────────────────────────────── */
+    --transition-fast: 150ms cubic-bezier(0.4, 0, 0.2, 1);
+    --transition-base: 220ms cubic-bezier(0.4, 0, 0.2, 1);
+    --transition-slow: 320ms cubic-bezier(0.4, 0, 0.2, 1);
+
+    /* ── Layout Dimensions ───────────────────────── */
+    --sidebar-width: 250px;
+    --sidebar-collapsed-width: 76px;
+    --header-height: 70px;
+    --content-max-width: 1440px;
+}

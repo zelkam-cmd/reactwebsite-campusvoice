@@ -1,0 +1,366 @@
+/* ============================================================
+   CampusVoice — Comprehensive Multi-Device Responsive System
+   Supports 320px Small Mobile to 1920px+ Ultra-Wide Desktop
+   ============================================================ */
+
+/* ── Base Structural Table & Grid Containment ────────────── */
+.app-main,
+.app-content {
+    min-width: 0;
+    max-width: 100%;
+    overflow-x: hidden;
+}
+
+.data-table-wrapper,
+.card,
+.glass-card {
+    min-width: 0;
+    max-width: 100%;
+    overflow: hidden;
+}
+
+.data-table-responsive {
+    width: 100%;
+    max-width: 100%;
+    overflow-x: auto !important;
+    -webkit-overflow-scrolling: touch;
+    display: block;
+}
+
+/* Custom Scrollbar for Smooth Table Scrolling */
+.data-table-responsive::-webkit-scrollbar {
+    height: 6px;
+}
+.data-table-responsive::-webkit-scrollbar-track {
+    background: rgba(241, 245, 249, 0.6);
+    border-radius: 4px;
+}
+.data-table-responsive::-webkit-scrollbar-thumb {
+    background: rgba(148, 163, 184, 0.5);
+    border-radius: 4px;
+}
+.data-table-responsive::-webkit-scrollbar-thumb:hover {
+    background: rgba(100, 116, 139, 0.8);
+}
+
+.data-table {
+    width: 100%;
+    min-width: 600px;
+}
+
+.data-table td:last-child,
+.data-table th:last-child {
+    white-space: nowrap;
+}
+
+/* ── 1. Ultra-Wide & Large Desktop (≥1280px) ──────────────── */
+@media (min-width: 1280px) {
+    .dashboard-grid {
+        display: grid;
+        grid-template-columns: minmax(0, 1.8fr) minmax(0, 1fr);
+        gap: 24px;
+        align-items: start;
+        width: 100%;
+    }
+
+    .stats-grid {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 20px;
+    }
+
+    .chart-grid {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 20px;
+    }
+
+    .survey-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+        gap: 24px;
+    }
+}
+
+/* ── 2. Standard Laptops & Tablets Landscape (992px – 1279px) */
+@media (min-width: 992px) and (max-width: 1279px) {
+    .stats-grid {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 16px;
+    }
+
+    /* Stack dashboard columns so left tables never overlap right sidebar cards */
+    .dashboard-grid {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr);
+        gap: 24px;
+        width: 100%;
+    }
+
+    .chart-grid {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 16px;
+    }
+
+    .survey-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+        gap: 20px;
+    }
+}
+
+/* ── 3. Mobile & Tablet Off-Canvas Sidebar (<992px) ───────── */
+@media (max-width: 991px) {
+    /* Shell Layout Adjustments */
+    .app-layout {
+        padding: 12px;
+    }
+
+    .app-main {
+        margin-left: 0 !important;
+        width: 100% !important;
+        padding-right: 0 !important;
+    }
+
+    /* Fixed Dark Sidebar becomes Off-Canvas Slide-In Drawer */
+    .app-sidebar {
+        position: fixed !important;
+        top: 12px !important;
+        left: 12px !important;
+        width: 270px !important;
+        height: calc(100vh - 24px) !important;
+        transform: translateX(calc(-100% - 30px)) !important;
+        transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1) !important;
+        z-index: 500 !important;
+        box-shadow: 0 25px 60px rgba(0, 0, 0, 0.4) !important;
+    }
+
+    .app-sidebar.active {
+        transform: translateX(0) !important;
+    }
+
+    /* Mobile Overlay Backdrop */
+    .sidebar-overlay {
+        position: fixed;
+        inset: 0;
+        background: rgba(15, 23, 42, 0.6);
+        -webkit-backdrop-filter: blur(8px);
+        backdrop-filter: blur(8px);
+        z-index: 450;
+        display: none;
+    }
+
+    .app-sidebar.active ~ .sidebar-overlay,
+    .sidebar-overlay.active {
+        display: block !important;
+    }
+
+    /* Top Navigation Header */
+    .hamburger-btn {
+        display: flex !important;
+    }
+
+    .app-header {
+        position: sticky !important;
+        top: 12px !important;
+        margin-bottom: 20px !important;
+        padding: 0 16px !important;
+        height: 60px !important;
+    }
+
+    .header-profile-info {
+        display: none;
+    }
+
+    /* Layout Grids */
+    .stats-grid {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 16px;
+    }
+
+    .dashboard-grid {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr);
+        gap: 20px;
+        width: 100%;
+    }
+
+    .chart-grid {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr);
+        gap: 20px;
+    }
+
+    .survey-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+        gap: 16px;
+    }
+}
+
+/* ── 4. Large Mobile (576px – 767px) ─────────────────────── */
+@media (max-width: 767px) {
+    .hero-card {
+        padding: 24px 20px !important;
+    }
+
+    .hero-card h1 {
+        font-size: 1.65rem !important;
+    }
+
+    .hero-card p {
+        font-size: 0.9rem !important;
+    }
+
+    .content-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 12px;
+    }
+
+    .content-actions {
+        width: 100%;
+        display: flex;
+        gap: 8px;
+        flex-wrap: wrap;
+    }
+
+    .content-actions .btn {
+        flex: 1 1 auto;
+        justify-content: center;
+    }
+
+    .stats-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 12px;
+    }
+
+    .stat-card {
+        padding: 16px !important;
+        gap: 12px;
+    }
+
+    .stat-card-icon {
+        width: 44px !important;
+        height: 44px !important;
+        border-radius: 12px !important;
+    }
+
+    .stat-card-value {
+        font-size: 1.5rem !important;
+    }
+
+    .stat-card-label {
+        font-size: 0.72rem !important;
+    }
+
+    .data-table-header {
+        padding: 14px 16px;
+        flex-direction: column;
+        align-items: stretch;
+        gap: 10px;
+    }
+
+    .data-table-header .search-bar {
+        width: 100%;
+    }
+
+    /* Modals */
+    .modal {
+        width: calc(100vw - 24px) !important;
+        max-height: 90vh !important;
+        margin: 12px !important;
+    }
+
+    /* Form Rows */
+    .form-row {
+        grid-template-columns: 1fr !important;
+    }
+}
+
+/* ── 5. Small Mobile (320px – 575px) ─────────────────────── */
+@media (max-width: 575px) {
+    .app-layout {
+        padding: 8px;
+    }
+
+    .stats-grid {
+        grid-template-columns: 1fr;
+        gap: 12px;
+    }
+
+    .survey-grid {
+        grid-template-columns: 1fr;
+        gap: 16px;
+    }
+
+    .hero-card {
+        padding: 20px 16px !important;
+        border-radius: 16px !important;
+    }
+
+    .hero-card h1 {
+        font-size: 1.45rem !important;
+    }
+
+    .card-header {
+        padding: 16px !important;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 10px;
+    }
+
+    .card-body {
+        padding: 16px !important;
+    }
+
+    /* Full Width Action Buttons on Small Mobile */
+    .btn {
+        width: 100%;
+        justify-content: center;
+    }
+
+    .action-btn {
+        padding: 10px 14px;
+        font-size: 0.825rem;
+    }
+
+    /* Breadcrumbs auto-scroll */
+    .breadcrumbs {
+        overflow-x: auto;
+        white-space: nowrap;
+        padding-bottom: 4px;
+    }
+
+    .breadcrumbs::-webkit-scrollbar {
+        display: none;
+    }
+
+    /* Login Card */
+    .login-card {
+        padding: 24px 18px !important;
+        border-radius: 20px !important;
+    }
+
+    /* Header adjustments */
+    .header-title {
+        font-size: 1rem !important;
+    }
+
+    /* Sticky survey form actions */
+    .survey-form-footer {
+        position: sticky;
+        bottom: 0;
+        background: rgba(255, 255, 255, 0.95);
+        -webkit-backdrop-filter: blur(20px);
+        backdrop-filter: blur(20px);
+        padding: 12px 16px;
+        margin: 0 -16px -16px -16px;
+        border-top: 1px solid rgba(226, 232, 240, 0.8);
+        box-shadow: 0 -4px 16px rgba(0, 0, 0, 0.08);
+        z-index: 100;
+    }
+}
