@@ -227,12 +227,12 @@ export default function App() {
             justifyContent: 'space-between',
             alignItems: 'center',
             fontSize: '12px',
-            color: '#64748b'
+            color: '#94a3b8'
           }}
         >
           <span>© 2026 CampusVoice — Bulacan State University</span>
           <span>
-            v1.0.0 | <a href="mailto:support@campusvoice.edu" style={{ color: '#0284c7', textDecoration: 'none' }}>support@campusvoice.edu</a>
+            v1.0.0 | <a href="mailto:support@campusvoice.edu" style={{ color: '#0284c7', textDecoration: 'none', opacity: 0.85 }}>support@campusvoice.edu</a>
           </span>
         </footer>
       </main>
