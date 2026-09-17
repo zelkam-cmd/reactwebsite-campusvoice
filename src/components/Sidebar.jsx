@@ -72,7 +72,7 @@ export default function Sidebar({ onNavigateStudents }) {
 
           <button
             type="button"
-            className="sidebar-link"
+            className="sidebar-link active"
             onClick={onNavigateStudents}
             title="Student Registry & Profiling"
           >

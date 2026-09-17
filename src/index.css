@@ -1,4 +1,4 @@
-﻿/* ============================================================
+/* ============================================================
    CampusVoice — Authentic Design System & Stylesheets
    Directly imported from C:\xampp\htdocs\CampusVoice\assets\css\
    ============================================================ */
@@ -33,16 +33,48 @@ body {
 .app-sidebar {
     background: linear-gradient(180deg, #0F172A 0%, #1E293B 100%) !important;
     border: 1px solid rgba(255, 255, 255, 0.15) !important;
-    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.3) !important;
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.25) !important;
 }
 .app-sidebar .sidebar-brand-name { color: #FFFFFF !important; }
 .app-sidebar .sidebar-brand-tagline { color: #38BDF8 !important; }
-.app-sidebar .sidebar-link { color: #94A3B8 !important; }
-.app-sidebar .sidebar-link:hover { background: rgba(255, 255, 255, 0.1) !important; color: #FFFFFF !important; }
-.app-sidebar .sidebar-link.active { background: linear-gradient(135deg, #0284C7 0%, #2563EB 100%) !important; color: #FFFFFF !important; }
-.app-sidebar .sidebar-link svg { color: #64748B !important; }
-.app-sidebar .sidebar-link.active svg { color: #FFFFFF !important; }
-.app-sidebar .sidebar-section-title { color: #64748B !important; }
+.app-sidebar .sidebar-link {
+    color: #94A3B8 !important;
+    opacity: 1 !important;
+}
+.app-sidebar .sidebar-link svg {
+    color: #64748B !important;
+    opacity: 1 !important;
+}
+.app-sidebar .sidebar-link.active {
+    background: rgba(255, 255, 255, 0.08) !important;
+    color: #FFFFFF !important;
+    box-shadow: none !important;
+    transform: none !important;
+}
+.app-sidebar .sidebar-link.active svg {
+    color: #FFFFFF !important;
+}
+.app-sidebar .sidebar-link:not(.disabled):hover {
+    background: rgba(255, 255, 255, 0.08) !important;
+    color: #FFFFFF !important;
+}
+.app-sidebar .sidebar-link:not(.disabled):hover svg {
+    color: #38BDF8 !important;
+}
+.app-sidebar .sidebar-section-title {
+    color: #64748B !important;
+}
+
+/* Button reset for interactive sidebar link */
+.app-sidebar button.sidebar-link {
+    background: transparent;
+    border: none;
+    font-family: inherit;
+    text-align: left;
+    width: 100%;
+    cursor: pointer;
+    padding: 10px 14px;
+}
 
 /* Disabled sidebar links (for profiling scope) */
 .sidebar-link.disabled,
@@ -50,9 +82,15 @@ body {
     cursor: not-allowed !important;
 }
 .sidebar-link.disabled {
-    opacity: 0.55 !important;
+    opacity: 1 !important;
+    color: #94A3B8 !important;
+    background: transparent !important;
     pointer-events: auto !important;
     user-select: none !important;
+}
+.sidebar-link.disabled svg {
+    color: #64748B !important;
+    opacity: 1 !important;
 }
 .sidebar-link.disabled:hover,
 .sidebar-link.disabled:hover * {
