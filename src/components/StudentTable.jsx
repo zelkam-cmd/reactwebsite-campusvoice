@@ -1,4 +1,4 @@
-﻿import React, { useState } from 'react';
+import React, { useState } from 'react';
 import { DEPARTMENTS, CIVIL_STATUSES } from '../data/initialStudents';
 
 export default function StudentTable({
@@ -211,10 +211,18 @@ export default function StudentTable({
                       <td>
                         <span
                           className="font-semibold"
-                          style={{ color: 'var(--color-primary)', cursor: 'pointer' }}
+                          style={{ color: 'var(--color-primary)', cursor: 'pointer', display: 'inline-block' }}
                           onClick={() => onView(stu)}
                         >
-                          {studentId}
+                          {studentId && studentId.includes('-') ? (
+                            <>
+                              {studentId.substring(0, studentId.lastIndexOf('-') + 1)}
+                              <br />
+                              {studentId.substring(studentId.lastIndexOf('-') + 1)}
+                            </>
+                          ) : (
+                            studentId
+                          )}
                         </span>
                       </td>
                       <td>
@@ -275,7 +283,7 @@ export default function StudentTable({
                       </td>
                       <td>
                         <span className={`badge ${isActive ? 'badge-success' : 'badge-gray'}`}>
-                          <span className={`badge-dot ${isActive ? 'active' : 'inactive'}`}></span> {isActive ? 'Active' : 'Inactive'}
+                          {isActive ? 'Active' : 'Inactive'}
                         </span>
                       </td>
                       <td>

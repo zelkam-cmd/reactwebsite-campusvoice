@@ -95,7 +95,7 @@ export default function StudentDetail({
                   {student.name}
                 </h2>
                 <span className={`badge ${isActive ? 'badge-success' : 'badge-gray'}`}>
-                  <span className={`badge-dot ${isActive ? 'active' : 'inactive'}`}></span> {isActive ? 'Active' : 'Inactive'}
+                  {isActive ? 'Active' : 'Inactive'}
                 </span>
               </div>
               <div style={{ fontSize: '13px', color: 'var(--color-text-secondary)', display: 'flex', gap: '12px', flexWrap: 'wrap' }}>
@@ -313,7 +313,7 @@ export default function StudentDetail({
                 <div className="profile-detail-label">Status:</div>
                 <div className="profile-detail-value">
                   <span className={`badge ${isActive ? 'badge-success' : 'badge-gray'}`}>
-                    <span className={`badge-dot ${isActive ? 'active' : 'inactive'}`}></span> {isActive ? 'Active' : 'Inactive'}
+                    {isActive ? 'Active' : 'Inactive'}
                   </span>
                 </div>
               </div>
