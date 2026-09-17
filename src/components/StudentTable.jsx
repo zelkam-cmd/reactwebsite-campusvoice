@@ -439,14 +439,6 @@ export default function StudentTable({
           </table>
         </div>
       </div>
-
-      {/* Footer */}
-      <footer style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginTop: '24px', paddingBottom: '20px', fontSize: '12px', color: '#64748b' }}>
-        <span>© 2026 CampusVoice — Bulacan State University</span>
-        <span>
-          v1.0.0 | <a href="mailto:support@campusvoice.edu" style={{ color: '#0284c7', textDecoration: 'none' }}>support@campusvoice.edu</a>
-        </span>
-      </footer>
     </div>
   );
 }
