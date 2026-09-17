@@ -25,10 +25,28 @@ html, body {
       radial-gradient(at 0% 100%, rgba(59, 130, 246, 0.40) 0px, transparent 50%),
       linear-gradient(135deg, #BAE6FD 0%, #E0E7FF 40%, #F3E8FF 70%, #D1FAE5 100%) !important;
   background-attachment: fixed !important;
+  background-repeat: no-repeat !important;
   background-size: cover !important;
+  overflow-x: hidden;
   
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+/* Custom authentic CampusVoice slim 8px scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: rgba(148, 163, 184, 0.5);
+  border-radius: 99px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(100, 116, 139, 0.7);
 }
 
 #root {

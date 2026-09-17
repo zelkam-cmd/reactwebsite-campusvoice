@@ -5,6 +5,9 @@ export default function AppHeader({ title = 'Student Information & Registry' }) 
     <header
       className="app-header"
       style={{
+        position: 'sticky',
+        top: '16px',
+        zIndex: 100,
         height: '70px',
         background: 'rgba(255, 255, 255, 0.75)',
         backdropFilter: 'blur(24px) saturate(180%)',

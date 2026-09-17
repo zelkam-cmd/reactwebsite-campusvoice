@@ -151,7 +151,7 @@ export default function App() {
   };
 
   return (
-    <div className="admin-console-layout">
+    <div className="admin-console-layout app-layout">
       {/* Toast Notification */}
       {toastMessage && (
         <div className="toast-notification">
@@ -166,7 +166,7 @@ export default function App() {
       <Sidebar onNavigateStudents={() => { setViewMode('list'); setSelectedStudent(null); }} />
 
       {/* Main Content Area */}
-      <main className="main-content">
+      <main className="main-content app-main">
         {/* Floating Glass Top Navbar Header from CampusVoice */}
         <AppHeader title={getNavTitle()} />
 
