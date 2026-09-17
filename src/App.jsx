@@ -6,7 +6,6 @@ import StudentEdit from './components/StudentEdit';
 import StudentAdd from './components/StudentAdd';
 import StudentDetail from './components/StudentDetail';
 import StudentPrint from './components/StudentPrint';
-import Dashboard from './components/Dashboard';
 import { INITIAL_STUDENTS } from './data/initialStudents';
 import './App.css';
 
@@ -146,9 +145,6 @@ export default function App() {
 
   // Dynamic top navbar title matching screenshots
   const getNavTitle = () => {
-    if (viewMode === 'dashboard') {
-      return 'Administrator Command Center';
-    }
     if (viewMode === 'edit' && selectedStudent) {
       return `Edit Student: ${selectedStudent.name}`;
     }
@@ -159,12 +155,6 @@ export default function App() {
       return `Student Dossier: ${selectedStudent.name}`;
     }
     return 'Student Records & Demographics Registry';
-  };
-
-  const handleNavigateDashboard = () => {
-    setViewMode('dashboard');
-    setSelectedStudent(null);
-    window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
   const handleNavigateStudents = () => {
@@ -187,12 +177,8 @@ export default function App() {
           </div>
         )}
 
-        {/* Left Sidebar (Interactive Dashboard & Students links) */}
-        <Sidebar
-          currentView={viewMode}
-          onNavigateDashboard={handleNavigateDashboard}
-          onNavigateStudents={handleNavigateStudents}
-        />
+        {/* Left Sidebar (Only Students active) */}
+        <Sidebar onNavigateStudents={handleNavigateStudents} />
 
         {/* Main Content Area */}
         <main className="app-main main-content">
@@ -201,14 +187,6 @@ export default function App() {
 
           {/* Dynamic Full-Page Views matching original CampusVoice */}
           <div className="app-content content-container">
-            {viewMode === 'dashboard' && (
-              <Dashboard
-                students={students}
-                onNavigateAddStudent={handleOpenAdd}
-                onNavigateStudents={handleNavigateStudents}
-              />
-            )}
-
             {viewMode === 'list' && (
               <StudentTable
                 students={students}
@@ -217,7 +195,6 @@ export default function App() {
                 onDelete={handleOpenDelete}
                 onAdd={handleOpenAdd}
                 onPrint={handleOpenPrint}
-                onNavigateDashboard={handleNavigateDashboard}
               />
             )}
 
@@ -226,7 +203,6 @@ export default function App() {
                 student={selectedStudent}
                 onSave={handleSaveStudent}
                 onCancel={handleNavigateStudents}
-                onNavigateDashboard={handleNavigateDashboard}
               />
             )}
 
@@ -234,7 +210,6 @@ export default function App() {
               <StudentAdd
                 onSave={handleSaveStudent}
                 onCancel={handleNavigateStudents}
-                onNavigateDashboard={handleNavigateDashboard}
                 existingStudents={students}
               />
             )}
@@ -246,7 +221,6 @@ export default function App() {
                 onDelete={handleOpenDelete}
                 onPrint={handleOpenPrint}
                 onBack={handleNavigateStudents}
-                onNavigateDashboard={handleNavigateDashboard}
               />
             )}
           </div>

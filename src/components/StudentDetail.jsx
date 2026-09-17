@@ -31,7 +31,7 @@ export default function StudentDetail({ student, onEdit, onDelete, onPrint, onBa
       {/* Breadcrumbs */}
       <div className="breadcrumbs" style={{ display: 'flex', alignItems: 'center', gap: '8px', fontSize: '14px', marginBottom: '18px' }}>
         <div className="breadcrumb-item">
-          <span style={{ color: '#0284c7', cursor: 'pointer', fontWeight: 600 }} onClick={onNavigateDashboard || onBack}>Dashboard</span>
+          <span style={{ color: '#0284c7', cursor: 'default', fontWeight: 600 }}>Dashboard</span>
         </div>
         <span className="breadcrumb-separator" style={{ color: '#94a3b8' }}>▸</span>
         <div className="breadcrumb-item">

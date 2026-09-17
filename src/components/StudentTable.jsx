@@ -76,10 +76,7 @@ export default function StudentTable({
         <div className="breadcrumb-item">
           <a
             href="#dashboard"
-            onClick={(e) => {
-              e.preventDefault();
-              if (onNavigateDashboard) onNavigateDashboard();
-            }}
+            onClick={(e) => e.preventDefault()}
           >
             Dashboard
           </a>

@@ -122,7 +122,7 @@ export default function StudentEdit({ student, onSave, onCancel, onNavigateDashb
       {/* Breadcrumbs matching Image 2 */}
       <div className="breadcrumbs" style={{ display: 'flex', alignItems: 'center', gap: '8px', fontSize: '13px', marginBottom: '14px' }}>
         <div className="breadcrumb-item">
-          <span style={{ color: '#0284c7', cursor: 'pointer', fontWeight: 600 }} onClick={onNavigateDashboard || onCancel}>Dashboard</span>
+          <span style={{ color: '#0284c7', cursor: 'default', fontWeight: 600 }}>Dashboard</span>
         </div>
         <span className="breadcrumb-separator" style={{ color: '#94a3b8' }}>▸</span>
         <div className="breadcrumb-item">

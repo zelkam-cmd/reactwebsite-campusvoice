@@ -1,6 +1,6 @@
 import React from 'react';
 
-export default function Sidebar({ currentView, onNavigateDashboard, onNavigateStudents }) {
+export default function Sidebar({ onNavigateStudents }) {
   return (
     <aside className="app-sidebar" id="sidebar">
       {/* Brand Header */}
@@ -23,11 +23,11 @@ export default function Sidebar({ currentView, onNavigateDashboard, onNavigateSt
         <div className="sidebar-section">
           <div className="sidebar-section-title">Overview</div>
 
-          <button
-            type="button"
+          <a
+            href="#dashboard"
             className="sidebar-link"
-            onClick={onNavigateDashboard}
-            title="Admin Command Center"
+            onClick={(e) => e.preventDefault()}
+            title="Overview (Inactive)"
           >
             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
               <rect x="3" y="3" width="7" height="7" />
@@ -36,7 +36,7 @@ export default function Sidebar({ currentView, onNavigateDashboard, onNavigateSt
               <rect x="3" y="14" width="7" height="7" />
             </svg>
             <span className="sidebar-link-text">Dashboard</span>
-          </button>
+          </a>
         </div>
 
         {/* SURVEY MANAGEMENT SECTION */}

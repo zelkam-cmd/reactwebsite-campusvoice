@@ -105,7 +105,7 @@ export default function StudentAdd({ onSave, onCancel, onNavigateDashboard, exis
         }}
       >
         <div className="breadcrumb-item">
-          <span style={{ color: '#0284c7', cursor: 'pointer' }} onClick={onNavigateDashboard || onCancel}>Dashboard</span>
+          <span style={{ color: '#0284c7', cursor: 'default' }}>Dashboard</span>
         </div>
         <span className="breadcrumb-separator" style={{ color: '#94a3b8' }}>▸</span>
         <div className="breadcrumb-item">
