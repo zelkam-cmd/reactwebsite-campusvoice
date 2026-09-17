@@ -1034,16 +1034,23 @@ button { cursor: pointer; border: none; background: none; }
 
 .sidebar-link-text { flex: 1; }
 
-.sidebar-link.disabled {
-    opacity: 0.55 !important;
+.sidebar-link.disabled,
+.sidebar-link.disabled * {
     cursor: not-allowed !important;
-    pointer-events: auto !important;
 }
 
-.sidebar-link.disabled:hover {
+.sidebar-link.disabled {
+    opacity: 0.55 !important;
+    pointer-events: auto !important;
+    user-select: none !important;
+}
+
+.sidebar-link.disabled:hover,
+.sidebar-link.disabled:hover * {
     background: transparent !important;
     color: #94A3B8 !important;
     transform: none !important;
+    box-shadow: none !important;
 }
 
 .sidebar-link.disabled:hover svg {
